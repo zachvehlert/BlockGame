@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cf1npwgd5hoeu"]
+
+[ext_resource type="Material" uid="uid://bkjw8iibm5v8k" path="res://Resources/Materials/ground.tres" id="1_688p1"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fo5ed"]
+size = Vector2(5000, 5000)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5ukr8"]
+data = PackedVector3Array(2500, 0, 2500, -2500, 0, 2500, 2500, 0, -2500, -2500, 0, 2500, -2500, 0, -2500, 2500, 0, -2500)
+
+[node name="Ground" type="MeshInstance3D" unique_id=660700987]
+material_override = ExtResource("1_688p1")
+mesh = SubResource("PlaneMesh_fo5ed")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=556719740]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1980415546]
+shape = SubResource("ConcavePolygonShape3D_5ukr8")

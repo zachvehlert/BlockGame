@@ -1,0 +1,308 @@
+[gd_scene format=3 uid="uid://cvbcr0470tjtw"]
+
+[ext_resource type="Script" uid="uid://c016vjf3ckf24" path="res://Scripts/player.gd" id="1_cvnsp"]
+[ext_resource type="Material" uid="uid://dp0if1all35nn" path="res://Resources/Materials/player.tres" id="2_6t5aa"]
+[ext_resource type="AudioStream" uid="uid://ckb4k3uiuja3a" path="res://Assets/grass-steps.wav" id="4_8erm5"]
+[ext_resource type="AudioStream" uid="uid://b687xj68gfcgx" path="res://Assets/grass-steps1.wav" id="5_f1ek2"]
+[ext_resource type="AudioStream" uid="uid://dk3kru8qv7kyu" path="res://Assets/grass-steps2.wav" id="6_tx1dd"]
+[ext_resource type="AudioStream" uid="uid://dd8u3jsdbn1n5" path="res://Assets/grass-steps3.wav" id="7_gymyn"]
+[ext_resource type="AudioStream" uid="uid://ch6e3ucb5vg3d" path="res://Assets/grass-steps4.wav" id="8_pu2lt"]
+[ext_resource type="AudioStream" uid="uid://bebpcemfd1frf" path="res://Assets/jump.wav" id="9_pu2lt"]
+[ext_resource type="AudioStream" uid="uid://dn6fqml84cne8" path="res://Assets/jump1.wav" id="10_ukyrk"]
+[ext_resource type="AudioStream" uid="uid://b0a44bpr21sf7" path="res://Assets/jump2.wav" id="11_7dp3o"]
+[ext_resource type="AudioStream" uid="uid://qkill5gbe5a" path="res://Assets/jump3.wav" id="12_h4iuc"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_go701"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cvnsp"]
+radius = 0.62109375
+height = 1.994207
+
+[sub_resource type="Animation" id="Animation_fo5ed"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.0000019, 1, 1.0000019)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6t5aa"]
+resource_name = "airborne"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0.8, 1), Vector3(1.2, 0.8, 1.2), Vector3(1, 0.8, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.2, 0), Vector3(0, 0.2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o06y3"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.0000019, 1, 1.0000019), Vector3(0.95, 1.05, 0.95), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_k7acu"]
+resource_name = "jump"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0.8, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cvnsp"]
+resource_name = "land"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.16666667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.2, 0), Vector3(0, 0, 0), Vector3(0, -0.2, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.16666667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 0.8, 1), Vector3(1, 1, 1), Vector3(1.2, 0.8, 1.2), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8erm5"]
+random_pitch = 1.3348398
+streams_count = 5
+stream_0/stream = ExtResource("4_8erm5")
+stream_1/stream = ExtResource("5_f1ek2")
+stream_2/stream = ExtResource("6_tx1dd")
+stream_3/stream = ExtResource("7_gymyn")
+stream_4/stream = ExtResource("8_pu2lt")
+
+[sub_resource type="Animation" id="Animation_5ukr8"]
+resource_name = "walk"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.4, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14941356, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1.0000019, 1, 1.0000019), Vector3(1, 0.9, 1), Vector3(1.0000019, 1, 1.0000019)]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WalkSounds")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": SubResource("AudioStreamRandomizer_8erm5")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o06y3"]
+_data = {
+&"RESET": SubResource("Animation_fo5ed"),
+&"airborne": SubResource("Animation_6t5aa"),
+&"idle": SubResource("Animation_o06y3"),
+&"jump": SubResource("Animation_k7acu"),
+&"land": SubResource("Animation_cvnsp"),
+&"walk": SubResource("Animation_5ukr8")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vgqql"]
+animation = &"airborne"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ukr8"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o06y3"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_k7acu"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_5ukr8")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_o06y3")
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fo5ed"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6t5aa"]
+animation = &"land"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5v1tr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fkybt"]
+xfade_time = 0.1
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0fj1v"]
+xfade_time = 0.1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vgqql"]
+xfade_time = 1.0
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x3wgy"]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7yui6"]
+states/End/position = Vector2(1250, 300.45078)
+states/Start/position = Vector2(283.63635, 99.58678)
+states/airborne/node = SubResource("AnimationNodeAnimation_vgqql")
+states/airborne/position = Vector2(745.862, 246.25598)
+states/grounded/node = SubResource("AnimationNodeBlendSpace1D_k7acu")
+states/grounded/position = Vector2(495.281, 100.43528)
+states/jump/node = SubResource("AnimationNodeAnimation_fo5ed")
+states/jump/position = Vector2(745.8575, 100.85083)
+states/land/node = SubResource("AnimationNodeAnimation_6t5aa")
+states/land/position = Vector2(495.00732, 246.22456)
+transitions = ["Start", "grounded", SubResource("AnimationNodeStateMachineTransition_5v1tr"), "land", "grounded", SubResource("AnimationNodeStateMachineTransition_fkybt"), "grounded", "jump", SubResource("AnimationNodeStateMachineTransition_0fj1v"), "jump", "airborne", SubResource("AnimationNodeStateMachineTransition_vgqql"), "airborne", "land", SubResource("AnimationNodeStateMachineTransition_x3wgy")]
+graph_offset = Vector2(-311.36588, -23.520744)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fd4e3"]
+streams_count = 4
+stream_0/stream = ExtResource("9_pu2lt")
+stream_1/stream = ExtResource("10_ukyrk")
+stream_2/stream = ExtResource("11_7dp3o")
+stream_3/stream = ExtResource("12_h4iuc")
+
+[node name="Player" type="CharacterBody3D" unique_id=783204240]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
+script = ExtResource("1_cvnsp")
+AIR_SPEED = 20.0
+RESTAGE_SPEED = 1.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=847620094]
+transform = Transform3D(1.0000019, 0, 0, 0, 1, 0, 0, 0, 1.0000019, 0, 0, 0)
+material_override = ExtResource("2_6t5aa")
+mesh = SubResource("CapsuleMesh_go701")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=215295903]
+transform = Transform3D(1.0000018, 0, -4.7683716e-07, 0, 1, 0, 4.7683716e-07, 0, 1.0000018, 0, 0.022103488, 0)
+shape = SubResource("CapsuleShape3D_cvnsp")
+
+[node name="CameraOrigin" type="Node3D" parent="." unique_id=1043506980]
+transform = Transform3D(1.0000001, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1.0000001, 0, 0.79999995, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraOrigin" unique_id=1291770434]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.50000006, 0, -0.50000006, 0.8660254, 0, 0, 0)
+spring_length = 8.0
+margin = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="CameraOrigin/SpringArm3D" unique_id=926392746]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2081051300]
+libraries/ = SubResource("AnimationLibrary_o06y3")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=151416858]
+tree_root = SubResource("AnimationNodeStateMachine_7yui6")
+anim_player = NodePath("../AnimationPlayer")
+parameters/grounded/blend_position = 0.0
+
+[node name="WalkSounds" type="AudioStreamPlayer" parent="." unique_id=160914230]
+volume_db = -5.0
+
+[node name="JumpSounds" type="AudioStreamPlayer" parent="." unique_id=1624767234]
+stream = SubResource("AudioStreamRandomizer_fd4e3")

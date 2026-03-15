@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://cr3kq1vg4noam"]
+
+[ext_resource type="Texture2D" uid="uid://bbft5afqvsgdg" path="res://Assets/cartoon-dust.png" id="1_cn72y"]
+
+[sub_resource type="Curve" id="Curve_ujmyf"]
+_data = [Vector2(0, 0), 0.0, 8.70403, 0, 0, Vector2(0.15276656, 0.75156796), 0.0, -2.3480453, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_dl30e"]
+curve = SubResource("Curve_ujmyf")
+
+[sub_resource type="Curve" id="Curve_xweey"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+bake_resolution = 10
+_data = [Vector2(0, 2.6797943), 0.0, -7.1562476, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_53paw"]
+curve = SubResource("Curve_xweey")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v8hq8"]
+lifetime_randomness = 0.3
+emission_shape_scale = Vector3(1, 0.38, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+gravity = Vector3(0, 0.3, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = 0.99999774
+radial_accel_curve = SubResource("CurveTexture_53paw")
+scale_min = 0.39999998
+scale_max = 0.79999995
+color = Color(0.9372549, 0.78039217, 0.5647059, 1)
+alpha_curve = SubResource("CurveTexture_dl30e")
+turbulence_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_su6ct"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_cn72y")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_qb4n1"]
+material = SubResource("StandardMaterial3D_su6ct")
+
+[node name="GPUParticles3D" type="GPUParticles3D" unique_id=1077833769]
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 0.8
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_v8hq8")
+draw_pass_1 = SubResource("QuadMesh_qb4n1")

@@ -1,0 +1,52 @@
+[gd_scene format=4 uid="uid://lbx0y0rwmtqf"]
+
+[ext_resource type="Material" uid="uid://cahhxc6e0ai1o" path="res://Resources/Materials/blocks.tres" id="1_mw0p0"]
+[ext_resource type="Material" uid="uid://ccqnpd1ryuhsp" path="res://Resources/Materials/powerstrip.tres" id="2_o5ai5"]
+[ext_resource type="Script" uid="uid://wlpfkcymo42e" path="res://Scripts/connector.gd" id="3_script"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d4uh8"]
+_surfaces = [{
+"aabb": AABB(-0.2, 0, -2, 0.4, 0.2, 4),
+"attribute_data": PackedByteArray("AACAPwAAAAAAAAAAAACAPgAAgD8AAIA+AACAPwAAAAAAAEA/AAAAAAAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAAAAAAIA+AACAPwAAgD8AAEA/AAAAAAAAQD8AAIA/AACAPwAAgD8AAEA/AAAAAAAAQD8AAIA/AACAPwAAgD8AAIA/AABAPwAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAIA/AAAAAAAAQD8AAAAAAAAAAAAAgD8AAIA/AABAPwAAAAAAAEA/AACAPwAAgD8AAIA/AABAPwAAAAAAAIA/AAAAAAAAAAAAAIA+AACAPwAAgD4AAAAAAAAAAAAAgD8AAIA/AABAPwAAAAAAAEA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAgD8AAIA+AACAPwAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD4AAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAACAPgAAgD8AAIA+AAAAAAAAAAAAAIA+AACAPwAAgD4AAAAAAACAPwAAAAAAAAAAAAAAAAAAAAAAAIA+AACAPwAAAAAAAIA/AACAP5qZGT8AAAAAmpkZPwAAgD+amRk/AAAAAAAAgD8AAIA/AACAPwAAgD+amRk/AAAAAAAAgD8AAAAAmpkZPwAAgD+amRk/AAAAAAAAgD8AAIA/"),
+"format": 34359738391,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 72,
+"vertex_data": PackedByteArray("zcxMvgAAAAAAAADAzczMvQAAAAAAAABAzczMvQAAAAAAAADAzcxMvgAAAAAAAADAzczMvQAAAAAAAADAzcxMvs3MTD4AAADAzcxMvgAAAAAAAADAzcxMvs3MTD4AAADAzcxMvgAAAAAAAABAzcxMvgAAAAAAAADAzcxMvgAAAAAAAABAzczMvQAAAAAAAABAzcxMvgAAAAAAAABAzczMvc3MTD4AAABAzczMvQAAAAAAAABAzcxMvs3MTD4AAADAzczMvQAAAAAAAADAzczMvc3MTD4AAADAzcxMvs3MTD4AAADAzczMvc3MTD4AAADAzcxMvs3MTD4AAABAzcxMvgAAAAAAAABAzcxMvs3MTD4AAADAzcxMvs3MTD4AAABAzcxMvgAAAAAAAABAzcxMvs3MTD4AAABAzczMvc3MTD4AAABAzcxMvs3MTD4AAABAzczMvc3MTD4AAADAzczMvc3MTD4AAABAzcxMPgAAAAAAAADAzczMPQAAAAAAAADAzcxMPgAAAAAAAABAzcxMPgAAAAAAAADAzczMPc3MTD4AAADAzczMPQAAAAAAAADAzcxMPgAAAAAAAABAzczMPQAAAAAAAADAzczMPQAAAAAAAABAzcxMPgAAAAAAAADAzcxMPgAAAAAAAABAzcxMPs3MTD4AAABAzcxMPgAAAAAAAABAzczMPQAAAAAAAABAzcxMPs3MTD4AAABAzcxMPgAAAAAAAADAzcxMPs3MTD4AAADAzczMPc3MTD4AAADAzcxMPgAAAAAAAADAzcxMPs3MTD4AAABAzcxMPs3MTD4AAADAzcxMPs3MTD4AAADAzczMPc3MTD4AAABAzczMPc3MTD4AAADAzcxMPs3MTD4AAABAzczMPQAAAAAAAABAzczMPc3MTD4AAABAzcxMPs3MTD4AAADAzcxMPs3MTD4AAABAzczMPc3MTD4AAABAzczMvQAAAAAAAADAzczMvQAAAAAAAABAzczMvc3MTD4AAADAzczMvc3MTD4AAABAzczMvc3MTD4AAADAzczMvQAAAAAAAABAzczMPQAAAAAAAADAzczMPc3MTD4AAABAzczMPQAAAAAAAABAzczMPc3MTD4AAADAzczMPc3MTD4AAABAzczMPQAAAAAAAADA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8//38AAP//AAD/fwAA//8AAP9/AAD//wAA////f/9//n////9//3/+f////3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//////wAA/z//////AAD/P/////8AAP8/////f/9//n////9//3/+f////3//f/5//3//////AAD/f/////8AAP9//////wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA////f/9/AID///9//38AgP///3//fwCA////f/9/AID///9//38AgP///3//fwCAAAD/f/9/AIAAAP9//38AgAAA/3//fwCAAAD/f/9/AIAAAP9//38AgAAA/3//fwCA")
+}]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wc8d8"]
+size = Vector3(0.2, 0.1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_endpt"]
+size = Vector3(1, 1, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o5ai5"]
+size = Vector3(2, 2, 2)
+
+[node name="ConnectorStraight" type="Node3D" unique_id=1085869693]
+script = ExtResource("3_script")
+
+[node name="Rails" type="MeshInstance3D" parent="." unique_id=690454083]
+material_override = ExtResource("1_mw0p0")
+mesh = SubResource("ArrayMesh_d4uh8")
+
+[node name="PowerLine" type="MeshInstance3D" parent="." unique_id=1842921859]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+material_override = ExtResource("2_o5ai5")
+mesh = SubResource("BoxMesh_wc8d8")
+
+[node name="PowerCol" type="Area3D" parent="." unique_id=955936342]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -2)
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PowerCol" unique_id=2055009909]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+shape = SubResource("BoxShape3D_endpt")
+
+[node name="InteractArea" type="Area3D" parent="." unique_id=1242226754]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractArea" unique_id=1029699745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_o5ai5")

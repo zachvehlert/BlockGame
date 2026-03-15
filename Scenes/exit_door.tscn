@@ -1,0 +1,169 @@
+[gd_scene format=4 uid="uid://dbekxuw8pugbb"]
+
+[ext_resource type="Script" uid="uid://b31gssvfxuucj" path="res://Scripts/exit_door.gd" id="script_1"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_b4nh8"]
+_surfaces = [{
+"aabb": AABB(-2, -2.75, -0.25, 4, 5.5, 0.5),
+"attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/"),
+"format": 34359738391,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AAAAwAAAMMAAAIA+AAAAwAAAMMAAAIC+AAAAwAAAMEAAAIC+AAAAQAAAMMAAAIC+AAAAwAAAMMAAAIC+AAAAwAAAMMAAAIA+AAAAwAAAMEAAAIC+AAAAwAAAMMAAAIC+AAAAQAAAMMAAAIC+AAAAwAAAMEAAAIC+AAAAwAAAMEAAAIA+AAAAwAAAMMAAAIA+AAAAwAAAMMAAAIA+AAAAwAAAMEAAAIA+AAAAQAAAMEAAAIA+AAAAQAAAMEAAAIA+AAAAwAAAMEAAAIA+AAAAwAAAMEAAAIC+AAAAwAAAMMAAAIA+AAAAQAAAMMAAAIA+AAAAQAAAMMAAAIC+AAAAQAAAMEAAAIA+AAAAQAAAMMAAAIA+AAAAwAAAMMAAAIA+AAAAQAAAMMAAAIC+AAAAQAAAMMAAAIA+AAAAQAAAMEAAAIA+AAAAQAAAMMAAAIC+AAAAQAAAMEAAAIC+AAAAwAAAMEAAAIC+AAAAwAAAMEAAAIC+AAAAQAAAMEAAAIC+AAAAQAAAMEAAAIA+AAAAQAAAMEAAAIA+AAAAQAAAMEAAAIC+AAAAQAAAMMAAAIC+AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5/")
+}]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dog84"]
+points = PackedVector3Array(-2, -2.75, -0.25, -2, -2.75, 0.25, -2, 2.7499995, -0.25, 2, -2.75, -0.25, 2, -2.75, 0.25, -2, 2.7499995, 0.25, 2, 2.7499995, -0.25, 2, 2.7499995, 0.25)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_i36wp"]
+_surfaces = [{
+"aabb": AABB(-3.5, 0, -2.5, 7, 7, 3),
+"attribute_data": PackedByteArray("VVVVP9u2bT8AAIA/AACAP1VVVT+SJEk/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAgD9VVVU/27ZtPwAAAAAAAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/VVVVP5IkST8AAIA/AACAP1VVVT+3bVs+AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/VVVVP9u2bT+rqio+27ZtPwAAAAAAAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAq6oqPtu2bT8AAAAAAAAAAAAAAAAAAIA/q6oqPtu2bT+rqio+kiRJPwAAAAAAAAAAAACAPwAAgD9VVVU/JUmSPVVVVT+3bVs+AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAIA/AAAAAFVVVT8lSZI9AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAAACrqio+JUmSPVVVVT8lSZI9AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAACrqio+kiRJP6uqKj63bVs+AACAPwAAAAAAAAAAAAAAAKuqKj4lSZI9AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAq6oqPiVJkj0AAAAAAAAAAKuqKj63bVs+AACAPwAAAABVVVU/AAAAAAAAgD8AAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAIA/AACAPwAAgD9VVVU/2YkdPlVVVT8AAIA/AACAPwAAgD9VVVU/AAAAAFVVVT+KnVg/AACAPwAAgD9VVVU/ip1YPwAAAAAAAIA/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAIA/AAAAAFVVVT/ZiR0+AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAAACrqio+2YkdPlVVVT/ZiR0+AAAAAAAAAACrqio+ip1YP6uqKj4AAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAgD+rqio+AACAPwAAAAAAAAAAAAAAAAAAgD9VVVU/ip1YP6uqKj6KnVg/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAP6uqKj6KnVg/AACAPwAAgD8AAAAAAAAAAAAAAAAAAIA/AACAPwAAAAAAAAAAAAAAAKuqKj7ZiR0+AAAAAAAAAACrqio+AACAP6uqKj7ZiR0+AACAPwAAAAAAAIA/AACAPwAAAAAAAAAAAACAPwAAAAAAAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/AACAPwAAgD8AAAAAAACAPwAAAAAAAAAAAACAPwAAAAAAAIA/AACAPwAAAAAAAAAAAAAAAAAAAAAAAIA/AAAAAAAAgD8AAIA/AAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/"),
+"format": 34359738391,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 144,
+"vertex_data": PackedByteArray("AABAwAAAAD8AAADAAABgwAAAAD8AACDAAAAAwAAAAD8AAADAAABgwAAAAAAAACDAAABgwAAAAD8AACDAAABgwAAAAAAAAAA/AABgwAAAAD8AACDAAABAwAAAAD8AAADAAABgwAAAAD8AAAA/AABgwAAAAAAAACDAAABgQAAAAAAAACDAAABgwAAAAD8AACDAAAAAwAAAAD8AAADAAABgwAAAAD8AACDAAAAAQAAAAD8AAADAAABgwAAAAAAAACDAAABgwAAAAAAAAAA/AABgQAAAAAAAACDAAABgwAAAAD8AACDAAABgwAAAAD8AAAA/AABgwAAAAAAAAAA/AABAwAAAAD8AAADAAABAwAAAAD8AAAAAAABgwAAAAD8AAAA/AABgwAAAAAAAAAA/AABgwAAAAD8AAAA/AABgQAAAAD8AAAA/AABAwAAAAD8AAAAAAABgQAAAAD8AAAA/AABgwAAAAD8AAAA/AABAwAAAAD8AAAAAAAAAwAAAAD8AAAAAAABgQAAAAD8AAAA/AABgwAAAAD8AACDAAABAQAAAAD8AAADAAAAAQAAAAD8AAADAAABgwAAAAD8AACDAAABgQAAAAAAAACDAAABgQAAAAD8AACDAAABgwAAAAD8AACDAAABgQAAAAD8AACDAAABAQAAAAD8AAADAAABgQAAAAAAAACDAAABgQAAAAD8AAAA/AABgQAAAAD8AACDAAABgQAAAAD8AACDAAABAQAAAAD8AAAAAAABAQAAAAD8AAADAAABgwAAAAAAAAAA/AABgQAAAAAAAAAA/AABgQAAAAAAAACDAAABgwAAAAAAAAAA/AABgQAAAAD8AAAA/AABgQAAAAAAAAAA/AABgQAAAAD8AAAA/AAAAwAAAAD8AAAAAAAAAQAAAAD8AAAAAAABgQAAAAD8AACDAAABgQAAAAD8AAAA/AABAQAAAAD8AAAAAAABgQAAAAAAAACDAAABgQAAAAAAAAAA/AABgQAAAAD8AAAA/AABAQAAAAD8AAAAAAABgQAAAAD8AAAA/AAAAQAAAAD8AAAAAAABAwAAAAD8AAADAAAAAwAAAAD8AAADAAABAwAAA4EAAAADAAABAwAAAAD8AAADAAABAwAAA4EAAAADAAABAwAAAAD8AAAAAAABAwAAAAD8AAAAAAAAAwAAAwEAAAAAAAAAAwAAAAD8AAAAAAABAwAAA4EAAAADAAAAAwAAAAD8AAADAAAAAwAAAwEAAAADAAABAwAAA4EAAAADAAAAAwAAAwEAAAADAAABAQAAA4EAAAADAAABAwAAAAD8AAAAAAABAwAAA4EAAAADAAABAwAAA4EAAAAAAAABAwAAAAD8AAAAAAABAwAAA4EAAAAAAAAAAwAAAwEAAAAAAAABAwAAA4EAAAADAAABAQAAA4EAAAAAAAABAwAAA4EAAAAAAAABAwAAA4EAAAAAAAAAAQAAAwEAAAAAAAAAAwAAAwEAAAAAAAABAQAAAAD8AAADAAAAAQAAAwEAAAADAAAAAQAAAAD8AAADAAABAQAAAAD8AAADAAABAQAAAAD8AAAAAAABAQAAA4EAAAAAAAABAQAAAAD8AAAAAAAAAQAAAAD8AAAAAAABAQAAA4EAAAAAAAABAQAAA4EAAAADAAAAAwAAAwEAAAADAAAAAQAAAwEAAAADAAABAwAAA4EAAAADAAABAQAAA4EAAAADAAABAQAAA4EAAAAAAAABAQAAAAD8AAADAAABAQAAA4EAAAADAAAAAQAAAwEAAAADAAABAQAAAAD8AAADAAABAQAAA4EAAAAAAAABAQAAA4EAAAADAAABAwAAA4EAAAAAAAABAQAAA4EAAAAAAAAAAQAAAwEAAAAAAAABAQAAA4EAAAAAAAAAAQAAAAD8AAAAAAAAAQAAAwEAAAAAAAAAAwAAAAD8AAADAAAAAwAAAAD8AAAAAAAAAwAAAwEAAAADAAAAAwAAAAD8AAADAAAAAQAAAAD8AAADAAAAAwAAAAD8AAAAAAAAAwAAAwEAAAAAAAAAAwAAAwEAAAADAAAAAwAAAAD8AAAAAAAAAwAAAwEAAAAAAAAAAQAAAwEAAAAAAAAAAwAAAwEAAAADAAAAAQAAAAD8AAADAAAAAQAAAAD8AAAAAAAAAwAAAAD8AAAAAAAAAQAAAAD8AAAAAAAAAQAAAAD8AAADAAAAAQAAAwEAAAAAAAAAAQAAAwEAAAAAAAAAAQAAAwEAAAADAAAAAwAAAwEAAAADAAAAAQAAAwEAAAADAAAAAQAAAwEAAAAAAAAAAQAAAAD8AAADA/3//////AAD/f/////8AAP9//////wAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//////AAD/f/////8AAP9///8AAAAA/////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAAAAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//////AAD/f///AAAAAP9///8AAAAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//3///wAAAAD/f/////8AAP9///8AAAAA/3///wAAAAD/f/////8AAP9//////wAA/3//////AAD/f/////8AAP9//////wAA/////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5//3//////AAD/f/////8AAP9//////wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//////wAA/z//////AAD/P/////8AAP8//////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//////wAA/z//////AAD/P/////8AAP8/////f/9//n////9//3/+f////3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA/////wAA/z//////AAD/P/////8AAP8/////f/9//n////9//3/+f////3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9/AID///9//38AgP///3//fwCA/3//////////f/////////9/////////////f/9/AID///9//38AgP///3//fwCA/38AAP//////fwAA//////9/AAD//////3//////////f/////////9/////////AAD/f/9/AIAAAP9//38AgAAA/3//fwCA/38AAP//////fwAA//////9/AAD/////AAD/f/9/AIAAAP9//38AgAAA/3//fwCA")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lt65b"]
+data = PackedVector3Array(-3, 0.5, -2, -3.5, 0.5, -2.5, -2, 0.5, -2, -3.5, 0, -2.5, -3.5, 0.5, -2.5, -3.5, 0, 0.5, -3.5, 0.5, -2.5, -3, 0.5, -2, -3.5, 0.5, 0.5, -3.5, 0, -2.5, 3.5, 0, -2.5, -3.5, 0.5, -2.5, -2, 0.5, -2, -3.5, 0.5, -2.5, 2, 0.5, -2, -3.5, 0, -2.5, -3.5, 0, 0.5, 3.5, 0, -2.5, -3.5, 0.5, -2.5, -3.5, 0.5, 0.5, -3.5, 0, 0.5, -3, 0.5, -2, -3, 0.5, 0, -3.5, 0.5, 0.5, -3.5, 0, 0.5, -3.5, 0.5, 0.5, 3.5, 0.5, 0.5, -3, 0.5, 0, 3.5, 0.5, 0.5, -3.5, 0.5, 0.5, -3, 0.5, 0, -2, 0.5, 0, 3.5, 0.5, 0.5, -3.5, 0.5, -2.5, 3, 0.5, -2, 2, 0.5, -2, -3.5, 0.5, -2.5, 3.5, 0, -2.5, 3.5, 0.5, -2.5, -3.5, 0.5, -2.5, 3.5, 0.5, -2.5, 3, 0.5, -2, 3.5, 0, -2.5, 3.5, 0.5, 0.5, 3.5, 0.5, -2.5, 3.5, 0.5, -2.5, 3, 0.5, 0, 3, 0.5, -2, -3.5, 0, 0.5, 3.5, 0, 0.5, 3.5, 0, -2.5, -3.5, 0, 0.5, 3.5, 0.5, 0.5, 3.5, 0, 0.5, 3.5, 0.5, 0.5, -2, 0.5, 0, 2, 0.5, 0, 3.5, 0.5, -2.5, 3.5, 0.5, 0.5, 3, 0.5, 0, 3.5, 0, -2.5, 3.5, 0, 0.5, 3.5, 0.5, 0.5, 3, 0.5, 0, 3.5, 0.5, 0.5, 2, 0.5, 0, -3, 0.5, -2, -2, 0.5, -2, -3, 7, -2, -3, 0.5, -2, -3, 7, -2, -3, 0.5, 0, -3, 0.5, 0, -2, 6, 0, -2, 0.5, 0, -3, 7, -2, -2, 0.5, -2, -2, 6, -2, -3, 7, -2, -2, 6, -2, 3, 7, -2, -3, 0.5, 0, -3, 7, -2, -3, 7, 0, -3, 0.5, 0, -3, 7, 0, -2, 6, 0, -3, 7, -2, 3, 7, 0, -3, 7, 0, -3, 7, 0, 2, 6, 0, -2, 6, 0, 3, 0.5, -2, 2, 6, -2, 2, 0.5, -2, 3, 0.5, -2, 3, 0.5, 0, 3, 7, 0, 3, 0.5, 0, 2, 0.5, 0, 3, 7, 0, 3, 7, -2, -2, 6, -2, 2, 6, -2, -3, 7, -2, 3, 7, -2, 3, 7, 0, 3, 0.5, -2, 3, 7, -2, 2, 6, -2, 3, 0.5, -2, 3, 7, 0, 3, 7, -2, -3, 7, 0, 3, 7, 0, 2, 6, 0, 3, 7, 0, 2, 0.5, 0, 2, 6, 0, -2, 0.5, -2, -2, 0.5, 0, -2, 6, -2, -2, 0.5, -2, 2, 0.5, -2, -2, 0.5, 0, -2, 6, 0, -2, 6, -2, -2, 0.5, 0, -2, 6, 0, 2, 6, 0, -2, 6, -2, 2, 0.5, -2, 2, 0.5, 0, -2, 0.5, 0, 2, 0.5, 0, 2, 0.5, -2, 2, 6, 0, 2, 6, 0, 2, 6, -2, -2, 6, -2, 2, 6, -2, 2, 6, 0, 2, 0.5, -2)
+
+[sub_resource type="Animation" id="Animation_x5y3r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 3.25, -1), Vector3(-6.8084903, 3.25, -1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Door:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x3nbi"]
+resource_name = "door_close"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 6, -1), Vector3(0, 3.25, -1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Door:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 0, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i2hq1"]
+resource_name = "door_open"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Door:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 3.25, -1), Vector3(0, 6, -1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Door:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n7o7u"]
+_data = {
+&"RESET": SubResource("Animation_x5y3r"),
+&"door_close": SubResource("Animation_x3nbi"),
+&"door_open": SubResource("Animation_i2hq1")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_888in"]
+animation = &"door_close"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_elbft"]
+animation = &"door_open"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b4nh8"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dog84"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i36wp"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_lt65b"]
+states/Start/position = Vector2(285.4546, 51.239677)
+states/door_close/node = SubResource("AnimationNodeAnimation_888in")
+states/door_close/position = Vector2(582.01654, 191.09091)
+states/door_open/node = SubResource("AnimationNodeAnimation_elbft")
+states/door_open/position = Vector2(582.1818, 51.090916)
+transitions = ["door_open", "door_close", SubResource("AnimationNodeStateMachineTransition_b4nh8"), "door_close", "door_open", SubResource("AnimationNodeStateMachineTransition_dog84"), "Start", "door_open", SubResource("AnimationNodeStateMachineTransition_i36wp")]
+graph_offset = Vector2(-221, -85)
+
+[node name="ExitDoor" type="Node3D" unique_id=91984872]
+script = ExtResource("script_1")
+
+[node name="Door" type="MeshInstance3D" parent="." unique_id=628969629]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.25, -1)
+mesh = SubResource("ArrayMesh_b4nh8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Door" unique_id=17998973]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door/StaticBody3D" unique_id=876086344]
+shape = SubResource("ConvexPolygonShape3D_dog84")
+
+[node name="DoorFrame" type="MeshInstance3D" parent="." unique_id=952036697]
+mesh = SubResource("ArrayMesh_i36wp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="DoorFrame" unique_id=123370168]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorFrame/StaticBody3D" unique_id=1927172825]
+shape = SubResource("ConcavePolygonShape3D_lt65b")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=311430260]
+libraries/ = SubResource("AnimationLibrary_n7o7u")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=2088412711]
+tree_root = SubResource("AnimationNodeStateMachine_lt65b")
+anim_player = NodePath("../AnimationPlayer")

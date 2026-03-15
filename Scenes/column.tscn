@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://byrd3q2g3f14n"]
+
+[ext_resource type="Script" uid="uid://ckvg5v1nfdvbg" path="res://Scripts/column.gd" id="1_nmhdn"]
+
+[node name="Column" type="CSGBox3D" unique_id=1838435091]
+use_collision = true
+size = Vector3(4, 4, 4)
+script = ExtResource("1_nmhdn")
+drop_delay = 1.0
+
+[node name="DropDelay" type="Timer" parent="." unique_id=1000414553]
+wait_time = 0.5
+one_shot = true
+
+[node name="BottomTime" type="Timer" parent="." unique_id=1578340840]
+wait_time = 3.0
+one_shot = true
