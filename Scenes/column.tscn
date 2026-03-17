@@ -1,6 +1,15 @@
 [gd_scene format=3 uid="uid://byrd3q2g3f14n"]
 
 [ext_resource type="Script" uid="uid://ckvg5v1nfdvbg" path="res://Scripts/column.gd" id="1_nmhdn"]
+[ext_resource type="AudioStream" uid="uid://37xfqq5p0qr" path="res://Assets/block_activate.wav" id="2_7sqlp"]
+[ext_resource type="AudioStream" uid="uid://3iyyhpaon3kg" path="res://Assets/block_drop.wav" id="3_d16ys"]
+[ext_resource type="AudioStream" uid="uid://depm6ridkm83g" path="res://Assets/block_land.wav" id="4_vbeq1"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_0pk2v"]
+stream_count = 3
+stream_0 = ExtResource("2_7sqlp")
+stream_1 = ExtResource("3_d16ys")
+stream_2 = ExtResource("4_vbeq1")
 
 [node name="Column" type="CSGBox3D" unique_id=1838435091]
 use_collision = true
@@ -15,3 +24,7 @@ one_shot = true
 [node name="BottomTime" type="Timer" parent="." unique_id=1578340840]
 wait_time = 3.0
 one_shot = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1102018613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+stream = SubResource("AudioStreamPlaylist_0pk2v")

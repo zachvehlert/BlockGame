@@ -121,7 +121,7 @@ func _physics_process(delta: float) -> void:
 		if velocity.y >= 0:
 			velocity += get_gravity() * delta
 		else:
-			velocity += get_gravity() * 2 * delta
+			velocity += get_gravity() * 3 * delta
 
 	# Variable jump height. Short inputs make short jumps and vice versa. Feels great
 	if is_on_floor():

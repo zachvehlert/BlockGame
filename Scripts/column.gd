@@ -22,6 +22,10 @@ enum State { IDLE, DROP_DELAY, DROPPING, WAITING, RISING }
 
 @onready var _drop_delay_timer: Timer = $DropDelay
 @onready var _bottom_timer: Timer = $BottomTime
+@onready var _audio: AudioStreamPlayer3D = $AudioStreamPlayer3D
+@onready var _snd_activate: AudioStream = _audio.stream.get_list_stream(0)
+@onready var _snd_drop: AudioStream = _audio.stream.get_list_stream(1)
+@onready var _snd_land: AudioStream = _audio.stream.get_list_stream(2)
 
 var player: CharacterBody3D = null
 var player_on_column: bool = false
@@ -83,15 +87,21 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 		player = null
 
 # Player pressed interact while in our area — start the drop
+func _play_sound(stream: AudioStream) -> void:
+	_audio.stream = stream
+	_audio.play()
+
 func _on_player_interact() -> void:
 	if state != State.IDLE:
 		return
+	_play_sound(_snd_activate)
 	# Drop by the full height of the column so it sinks flush with the ground
 	drop_target_y = origin_y - size.y + 0.1
 	if drop_delay > 0.0:
 		state = State.DROP_DELAY
 		_drop_delay_timer.start()
 	else:
+		_play_sound(_snd_drop)
 		state = State.DROPPING
 
 func _process(delta: float) -> void:
@@ -100,6 +110,7 @@ func _process(delta: float) -> void:
 			# Move down at a constant speed
 			position.y = move_toward(position.y, drop_target_y, drop_speed * delta)
 			if is_equal_approx(position.y, drop_target_y):
+				_play_sound(_snd_land)
 				state = State.WAITING
 				rise_speed = 0.0
 				_bottom_timer.start()
@@ -125,13 +136,16 @@ func _process(delta: float) -> void:
 
 			# Column reached the top — launch the player and go back to idle
 			if is_equal_approx(position.y, origin_y):
+				_audio.stop()
 				if player_on_column and player:
 					player.velocity.y = rise_speed * launch_multiplier
 				state = State.IDLE
 
 func _on_drop_delay_timeout() -> void:
+	_play_sound(_snd_drop)
 	state = State.DROPPING
 
 func _on_bottom_timeout() -> void:
 	if state == State.WAITING:
+		_play_sound(_snd_drop)
 		state = State.RISING

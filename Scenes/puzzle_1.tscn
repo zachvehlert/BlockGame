@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dbekxuw8pugbb" path="res://Scenes/exit_door.tscn" id="9_6he5u"]
 [ext_resource type="PackedScene" uid="uid://n6acdmsxqno0" path="res://Scenes/connector_half.tscn" id="9_8yig3"]
 [ext_resource type="PackedScene" uid="uid://bmdyjms5is3or" path="res://Scenes/power_lock.tscn" id="10_8yig3"]
+[ext_resource type="PackedScene" uid="uid://dvogm3klxdifw" path="res://Scenes/test_proc_column.tscn" id="11_8yig3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6he5u"]
 sky_top_color = Color(0.5803922, 0.77254903, 0.8509804, 1)
@@ -283,3 +284,6 @@ size = Vector3(43.5, 39.5, 24)
 [node name="CSGBox3D2" type="CSGBox3D" parent="BackgroundBlocks/CSGCombiner3D4" unique_id=517628150]
 transform = Transform3D(0.9659258, 0, 0.25881904, 0, 1, 0, -0.25881904, 0, 0.9659258, -16, 18, 11.5)
 size = Vector3(25, 37, 24)
+
+[node name="TestProcColumn" parent="." unique_id=1346648731 instance=ExtResource("11_8yig3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -1)
