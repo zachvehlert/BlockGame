@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://37xfqq5p0qr" path="res://Assets/block_activate.wav" id="2_7sqlp"]
 [ext_resource type="AudioStream" uid="uid://3iyyhpaon3kg" path="res://Assets/block_drop.wav" id="3_d16ys"]
 [ext_resource type="AudioStream" uid="uid://depm6ridkm83g" path="res://Assets/block_land.wav" id="4_vbeq1"]
+[ext_resource type="AudioStream" uid="uid://dakul42hwtdqo" path="res://Assets/superjump.wav" id="5_d16ys"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_0pk2v"]
 stream_count = 3
@@ -28,3 +29,6 @@ one_shot = true
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=1102018613]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
+
+[node name="SuperJumpSounds" type="AudioStreamPlayer" parent="." unique_id=1063107649]
+stream = ExtResource("5_d16ys")

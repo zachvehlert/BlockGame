@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 signal interact
 signal rotate_pressed
+signal jumped
 
 @export_category("Controller Parameters")
 @export var SPEED = 5.0
@@ -9,22 +10,16 @@ signal rotate_pressed
 @export var JUMP_VELOCITY = 6
 @export var MOUSE_SENSITIVITY = 0.002
 
-@export_category("Restage")
-@export var RESTAGE_DURATION: float = 1.0
-@export var RESTAGE_SPEED: float = 2.0
-
 @export_category("Animation")
 @export var BLEND_SPEED = 20 # effects the speed at which animations in my animation blend tree (inside my state machine) blend between eachother
 
 # Camera Stuff
 @onready var camera_origin: Node3D = $CameraOrigin
+@onready var camera: Camera3D = $CameraOrigin/SpringArm3D/Camera3D
 
 # Animation stuff
 @onready var anim_tree: AnimationTree = $AnimationTree
 @onready var state_machine: AnimationNodeStateMachinePlayback = anim_tree["parameters/playback"]
-
-# Mesh (for restage animation snapshots)
-@onready var mesh: MeshInstance3D = $MeshInstance3D
 
 # Particals
 @onready var dust_scene: PackedScene = preload("res://Scenes/DustParticles.tscn")
@@ -32,14 +27,9 @@ signal rotate_pressed
 # Player Sounds
 @onready var jump_sounds: AudioStreamPlayer = $JumpSounds
 
-# Restage state
-var frame_history: Array[Dictionary] = []
-var is_restaging: bool = false
-var restage_timer: float = 0.0
-var is_restage_recording: bool = false
-var _dust_emitted_this_frame: bool = false
-var _restage_start_anim_state: StringName
-var _restage_start_blend_position: float
+var max_height := -INF
+var _superjump_fov_active := false
+var _default_fov: float
 
 func emit_dust() -> void:
 	var dust := dust_scene.instantiate()
@@ -47,11 +37,11 @@ func emit_dust() -> void:
 	add_child(dust)
 	dust.emitting = true
 	dust.finished.connect(dust.queue_free)
-	_dust_emitted_this_frame = true
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	state_machine.travel("grounded")
+	_default_fov = camera.fov
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Camera stuff from claude. Don't reinvent the wheel here because who cares?
@@ -63,58 +53,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-func _restage_activate() -> void:
-	is_restage_recording = true
-	restage_timer = RESTAGE_DURATION
-	frame_history.clear()
-	_restage_start_anim_state = state_machine.get_current_node()
-	_restage_start_blend_position = anim_tree["parameters/grounded/blend_position"]
-
-func _restage_record(delta: float) -> void:
-	restage_timer -= delta
-	frame_history.append({
-		"position": global_position,
-		"mesh_position": mesh.position,
-		"mesh_scale": mesh.scale,
-		"dust": _dust_emitted_this_frame,
-	})
-	_dust_emitted_this_frame = false
-	if restage_timer <= 0.0:
-		is_restage_recording = false
-		is_restaging = true
-		anim_tree.active = false
-
-func _restage_playback() -> void:
-	var pops_per_frame := int(RESTAGE_SPEED)
-	var snapshot: Dictionary
-	for i in pops_per_frame:
-		if frame_history.size() > 0:
-			snapshot = frame_history.pop_back()
-			global_position = snapshot.position
-	if snapshot:
-		mesh.position = snapshot.mesh_position
-		mesh.scale = snapshot.mesh_scale
-		if snapshot.dust:
-			emit_dust()
-	if frame_history.size() == 0:
-		is_restaging = false
-		velocity = Vector3.ZERO
-		anim_tree.active = true
-		state_machine.start(_restage_start_anim_state, true)
-		anim_tree["parameters/grounded/blend_position"] = _restage_start_blend_position
-
 func _physics_process(delta: float) -> void:
+	print(velocity.y)
 	if Input.is_action_just_pressed("interact"):
 		interact.emit()
 	if Input.is_action_just_pressed("rotate"):
 		rotate_pressed.emit()
-
-	if Input.is_action_just_pressed("restage") and not is_restaging and not is_restage_recording:
-		_restage_activate()
-
-	if is_restaging:
-		_restage_playback()
-		return
 
 	# Variable Gravity because jumping up should feel nice and falling down should feel heavy
 	if not is_on_floor():
@@ -127,6 +71,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = JUMP_VELOCITY
+			jumped.emit()
 			state_machine.travel("jump")
 			emit_dust()
 			jump_sounds.play()
@@ -137,6 +82,14 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and state_machine.get_current_node() in ["airborne", "jump"]:
 		state_machine.start("land")
 		emit_dust()
+		if _superjump_fov_active:
+			_superjump_fov_active = false
+			var tween := create_tween()
+			tween.tween_property(camera, "fov", _default_fov, 0.3).set_ease(Tween.EASE_OUT)
+
+	# Fell off an edge (not jumping) — go straight to airborne
+	if not is_on_floor() and state_machine.get_current_node() == "grounded":
+		state_machine.travel("airborne")
 
 	# More camera and direction stuff. I really don't understand this but who cares?
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
@@ -158,10 +111,16 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	if global_position.y > max_height:
+		max_height = global_position.y
+		print("New max height: ", max_height)
+
 	# Blend toward walk (1) or idle (-1)
 	var target_blend := 1.0 if direction else -1.0
 	var current_blend: float = anim_tree["parameters/grounded/blend_position"]
 	anim_tree["parameters/grounded/blend_position"] = move_toward(current_blend, target_blend, BLEND_SPEED * delta)
 
-	if is_restage_recording:
-		_restage_record(delta)
+func start_superjump_fov() -> void:
+	_superjump_fov_active = true
+	var tween := create_tween()
+	tween.tween_property(camera, "fov", 95.0, 0.15).set_ease(Tween.EASE_OUT)

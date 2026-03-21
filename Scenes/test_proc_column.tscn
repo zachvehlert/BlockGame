@@ -14,7 +14,6 @@ _surfaces = [{
 [node name="TestProcColumn" type="Node3D" unique_id=1346648731]
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1802239894]
-visible = false
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=358795114]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -60,4 +59,5 @@ operation = 2
 size = Vector3(3.9350586, 1, 1)
 
 [node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="." unique_id=372935907]
+visible = false
 mesh = SubResource("ArrayMesh_t1pqp")

@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://lbx0y0rwmtqf" path="res://Scenes/connector_straight.tscn" id="6_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://dkdn87iqxsgeu" path="res://Scenes/connector_corner.tscn" id="8_0fj1v"]
 [ext_resource type="PackedScene" uid="uid://d3efw5h6etw7i" path="res://Scenes/power_source.tscn" id="8_k7acu"]
+[ext_resource type="Script" uid="uid://cup175gyx0lky" path="res://Scripts/column_wear.gd" id="9_5v1tr"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_fo5ed"]
 size = Vector2(100, 100)
@@ -33,38 +34,10 @@ shape = SubResource("ConcavePolygonShape3D_fo5ed")
 transform = Transform3D(0.9033354, 0, 0.4289352, 0, 1, 0, -0.4289352, 0, 0.9033354, -9, 16, 20)
 RESTAGE_DURATION = 3.0
 
+[node name="CSGCombiner3D" parent="." unique_id=1576726834 instance=ExtResource("5_5ukr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 1.5, -9)
+
 [node name="Colums" type="Node3D" parent="." unique_id=1546692318]
-
-[node name="Column" parent="Colums" unique_id=1838435091 instance=ExtResource("5_fo5ed")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 2.5, 24.5)
-
-[node name="ConnectorCorner" parent="Colums/Column" unique_id=133770736 instance=ExtResource("8_0fj1v")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2, 0)
-
-[node name="Column4" parent="Colums" unique_id=975973869 instance=ExtResource("5_fo5ed")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 1, 28.5)
-size = Vector3(4, 1, 4)
-
-[node name="ConnectorStraight" parent="Colums/Column4" unique_id=1085869693 instance=ExtResource("6_5ukr8")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5, 0)
-
-[node name="Column5" parent="Colums" unique_id=229052695 instance=ExtResource("5_fo5ed")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, 28.5)
-size = Vector3(4, 2, 4)
-
-[node name="ConnectorCorner" parent="Colums/Column5" unique_id=1614761450 instance=ExtResource("8_0fj1v")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1, 0)
-
-[node name="Column2" parent="Colums" unique_id=1849475759 instance=ExtResource("5_fo5ed")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 4, 24.5)
-size = Vector3(4, 7, 4)
-
-[node name="ConnectorCorner" parent="Colums/Column2" unique_id=675503751 instance=ExtResource("8_0fj1v")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 3.5, 0)
-
-[node name="Column3" parent="Colums" unique_id=391365902 instance=ExtResource("5_fo5ed")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.25, 7, 19.5)
-size = Vector3(4, 13, 4)
 
 [node name="ConnectorStraight" parent="Colums" unique_id=676030683 instance=ExtResource("6_5ukr8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0.5, 20.5)
@@ -81,8 +54,364 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0.5, 8.5)
 [node name="ConnectorStraight5" parent="Colums" unique_id=773097264 instance=ExtResource("6_5ukr8")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -17, 0.5, 28.5)
 
-[node name="CSGCombiner3D" parent="." unique_id=1576726834 instance=ExtResource("5_5ukr8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -9)
-
 [node name="PowerSource" parent="." unique_id=2103182906 instance=ExtResource("8_k7acu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5, 0.5, 28.5)
+
+[node name="WearGenerator" type="CSGCombiner3D" parent="." unique_id=1920627972]
+script = ExtResource("9_5v1tr")
+metadata/_custom_type_script = "uid://cup175gyx0lky"
+
+[node name="Column" parent="WearGenerator" unique_id=1838435091 instance=ExtResource("5_fo5ed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 2.5, 24.5)
+
+[node name="ConnectorCorner" parent="WearGenerator/Column" unique_id=133770736 instance=ExtResource("8_0fj1v")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 2, 0)
+
+[node name="WearChunk_0_0" type="CSGBox3D" parent="WearGenerator/Column" unique_id=66643711]
+transform = Transform3D(-0.10911341, 0.6713797, -0.73303723, 0.38718015, -0.650495, -0.6534124, -0.9155249, -0.3551135, -0.18896715, 2, -0.23737371, 2)
+operation = 2
+size = Vector3(0.49563575, 0.32437953, 0.5565697)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_1" type="CSGBox3D" parent="WearGenerator/Column" unique_id=1255010601]
+transform = Transform3D(-0.84271514, -0.5285706, -0.10219787, -0.22134611, 0.51322603, -0.82921946, 0.49075162, -0.6761747, -0.5495004, -2, -0.7040776, 2)
+operation = 2
+size = Vector3(0.42525446, 0.5406566, 0.41598752)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_2" type="CSGBox3D" parent="WearGenerator/Column" unique_id=1485211190]
+transform = Transform3D(0.50771, 0.8499403, 0.14082603, -0.13559379, 0.24025601, -0.96119267, -0.85079074, 0.46891195, 0.23722701, -2, 1.3146396, -2)
+operation = 2
+size = Vector3(0.5259927, 0.45969638, 0.32619378)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_3" type="CSGBox3D" parent="WearGenerator/Column" unique_id=1719129999]
+transform = Transform3D(0.9212097, -0.27606595, 0.27415368, 0.064733714, -0.5860669, -0.8076727, 0.38364327, 0.76178294, -0.52201974, 2, 1.316169, 2)
+operation = 2
+size = Vector3(0.5186599, 0.3566788, 0.5787271)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_4" type="CSGBox3D" parent="WearGenerator/Column" unique_id=1576762533]
+transform = Transform3D(0.5926706, 0.7290827, -0.34231555, 0.17432772, -0.531042, -0.8292191, -0.78635323, 0.43177864, -0.4418323, 2, 0.5063124, -2)
+operation = 2
+size = Vector3(0.5534319, 0.4704728, 0.39745328)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_5" type="CSGBox3D" parent="WearGenerator/Column" unique_id=308673488]
+transform = Transform3D(-0.9922259, 0.079966575, -0.095357895, -0.12265663, -0.49876913, 0.8580121, 0.021050721, 0.86303806, 0.5047001, 2, -1.6112463, 2)
+operation = 2
+size = Vector3(0.4867239, 0.54437834, 0.31941384)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_6" type="CSGBox3D" parent="WearGenerator/Column" unique_id=1212206070]
+transform = Transform3D(0.12560914, -0.98711604, -0.09911723, -0.29077226, 0.05888987, -0.9549782, 0.94851136, 0.14877455, -0.27962887, -2, 0.08612323, -2)
+operation = 2
+size = Vector3(0.41504085, 0.7991508, 0.5226241)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_7" type="CSGBox3D" parent="WearGenerator/Column" unique_id=1629031744]
+transform = Transform3D(-0.91294724, 0.04892689, -0.40513396, -0.28651434, 0.6300827, 0.7217377, 0.29058033, 0.7749851, -0.561214, -2, 1.9145036, 2)
+operation = 2
+size = Vector3(0.5111952, 0.5649005, 0.35169286)
+metadata/wear_chunk = true
+
+[node name="Column4" parent="WearGenerator" unique_id=975973869 instance=ExtResource("5_fo5ed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 1, 28.5)
+size = Vector3(4, 1, 4)
+
+[node name="ConnectorStraight" parent="WearGenerator/Column4" unique_id=1085869693 instance=ExtResource("6_5ukr8")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5, 0)
+
+[node name="WearChunk_1_0" type="CSGBox3D" parent="WearGenerator/Column4" unique_id=647432008]
+transform = Transform3D(0.2980912, -0.6039351, -0.7391915, -0.9012646, 0.07701153, -0.42636994, 0.31442603, 0.79330426, -0.52134883, 2, -0.41950226, 2)
+operation = 2
+size = Vector3(0.3130522, 0.42511773, 0.30504417)
+metadata/wear_chunk = true
+
+[node name="WearChunk_1_1" type="CSGBox3D" parent="WearGenerator/Column4" unique_id=131144505]
+transform = Transform3D(-0.9136627, -0.38771075, 0.12206942, -0.10358091, -0.068319105, -0.9922719, 0.39305413, -0.9192458, 0.022261182, 2, -0.26317507, -2)
+operation = 2
+size = Vector3(0.30439693, 0.4147641, 0.41397363)
+metadata/wear_chunk = true
+
+[node name="Column5" parent="WearGenerator" unique_id=229052695 instance=ExtResource("5_fo5ed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.5, 28.5)
+size = Vector3(4, 2, 4)
+
+[node name="ConnectorCorner" parent="WearGenerator/Column5" unique_id=1614761450 instance=ExtResource("8_0fj1v")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 1, 0)
+
+[node name="WearChunk_2_0" type="CSGBox3D" parent="WearGenerator/Column5" unique_id=1371458135]
+transform = Transform3D(0.5221969, 0.75307524, 0.400235, 0.22287016, -0.5735011, 0.78830534, 0.8231885, -0.32245016, -0.4673185, 2, 0.20244765, 2)
+operation = 2
+size = Vector3(0.32132593, 0.36343998, 0.42539418)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_1" type="CSGBox3D" parent="WearGenerator/Column5" unique_id=1549096742]
+transform = Transform3D(-0.92995083, 0.33016804, -0.1618035, -0.28255516, -0.9233132, -0.26010627, -0.23527409, -0.19616762, 0.9519266, 2, -0.9963278, -2)
+operation = 2
+size = Vector3(0.41496474, 0.6781067, 0.35520416)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_2" type="CSGBox3D" parent="WearGenerator/Column5" unique_id=1612492360]
+transform = Transform3D(-0.03570828, -0.44390774, -0.89536077, 0.4655751, -0.80015665, 0.37813908, -0.8842877, -0.40335494, 0.2352446, -2, -0.34898472, -2)
+operation = 2
+size = Vector3(0.40230808, 0.5696213, 0.37345734)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_3" type="CSGBox3D" parent="WearGenerator/Column5" unique_id=1353891629]
+transform = Transform3D(0.88620436, 0.35693043, 0.29536834, 0.44546357, -0.48130023, -0.7549254, -0.12729502, 0.80059403, -0.58552986, 2, -0.6845406, 2)
+operation = 2
+size = Vector3(0.37538654, 0.4139371, 0.58329797)
+metadata/wear_chunk = true
+
+[node name="Column2" parent="WearGenerator" unique_id=1849475759 instance=ExtResource("5_fo5ed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 4, 24.5)
+size = Vector3(4, 7, 4)
+
+[node name="ConnectorCorner" parent="WearGenerator/Column2" unique_id=675503751 instance=ExtResource("8_0fj1v")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 3.5, 0)
+
+[node name="WearChunk_3_0" type="CSGBox3D" parent="WearGenerator/Column2" unique_id=279670040]
+transform = Transform3D(0.609594, -0.7922418, -0.027350832, -0.1878397, -0.1108419, -0.9759254, 0.77013725, 0.6000558, -0.21638303, 2, 3.221497, 2)
+operation = 2
+size = Vector3(0.5422658, 0.35256824, 0.47451937)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_1" type="CSGBox3D" parent="WearGenerator/Column2" unique_id=1562799116]
+transform = Transform3D(0.21315968, -0.56630135, 0.7961568, 0.47874346, -0.64981, -0.5903826, 0.85168517, 0.5070007, 0.13259976, 2, 3.1777635, -2)
+operation = 2
+size = Vector3(0.5524609, 0.7192274, 0.34608582)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_2" type="CSGBox3D" parent="WearGenerator/Column2" unique_id=1092704494]
+transform = Transform3D(-0.14626792, 0.92747664, 0.34408274, -0.336082, 0.28054568, -0.89907897, -0.9304056, -0.24714646, 0.27067336, 2, -0.92691946, 2)
+operation = 2
+size = Vector3(0.53332627, 0.7954912, 0.3341016)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_3" type="CSGBox3D" parent="WearGenerator/Column2" unique_id=532107182]
+transform = Transform3D(-0.013845354, -0.64173836, 0.7667986, 0.47183645, 0.6719288, 0.57086074, -0.8815774, 0.36970735, 0.29349244, -2, 2.9360452, -2)
+operation = 2
+size = Vector3(0.36844817, 0.6654793, 0.585581)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_4" type="CSGBox3D" parent="WearGenerator/Column2" unique_id=1399013493]
+transform = Transform3D(0.13512783, 0.7233371, -0.67714393, 0.97621554, -0.21413073, -0.033928983, -0.16953942, -0.6564537, -0.7350679, 2, -2.8500526, 2)
+operation = 2
+size = Vector3(0.39060563, 0.3146971, 0.34061095)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_5" type="CSGBox3D" parent="WearGenerator/Column2" unique_id=864049233]
+transform = Transform3D(0.98257875, 0.06687042, 0.17339955, 0.16611858, 0.102326624, -0.9807823, -0.083328694, 0.9925007, 0.08943554, 2, 1.6674938, -2)
+operation = 2
+size = Vector3(0.36538672, 0.6302391, 0.33433214)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_6" type="CSGBox3D" parent="WearGenerator/Column2" unique_id=1026669390]
+transform = Transform3D(-0.71585566, -0.28362513, 0.6380497, -0.12669533, 0.9513788, 0.28076082, -0.6866578, 0.1201463, -0.7169839, 2, -2.448629, -2)
+operation = 2
+size = Vector3(0.41804096, 0.74058247, 0.358559)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_7" type="CSGBox3D" parent="WearGenerator/Column2" unique_id=1883695000]
+transform = Transform3D(-0.6572908, -0.13031489, 0.74228483, 0.44840577, -0.85925066, 0.24621256, 0.60572356, 0.49467805, 0.6232115, -2, 0.7628393, 2)
+operation = 2
+size = Vector3(0.51053447, 0.43752944, 0.53382355)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_8" type="CSGBox3D" parent="WearGenerator/Column2" unique_id=1766265505]
+transform = Transform3D(-0.4531217, -0.57554346, -0.68075734, -0.10940843, 0.7937843, -0.5982778, 0.8847093, -0.19661209, -0.4226502, -2, 2.3091803, 2)
+operation = 2
+size = Vector3(0.5252197, 0.40447855, 0.51807916)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_9" type="CSGBox3D" parent="WearGenerator/Column2" unique_id=1008877556]
+transform = Transform3D(-0.601837, -0.7981774, 0.026553521, -0.013362012, 0.04330865, 0.99897236, -0.7985072, 0.6008637, -0.036730003, 2, -0.9816699, -2)
+operation = 2
+size = Vector3(0.36822662, 0.6894473, 0.41623628)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_10" type="CSGBox3D" parent="WearGenerator/Column2" unique_id=720771116]
+transform = Transform3D(0.10735148, 0.4159091, -0.9030478, -0.4310573, 0.83795786, 0.33468843, 0.8959159, 0.35333604, 0.26923665, -2, -2.3093488, -2)
+operation = 2
+size = Vector3(0.3202011, 0.35221094, 0.5505996)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_11" type="CSGBox3D" parent="WearGenerator/Column2" unique_id=853514222]
+transform = Transform3D(-0.28942305, -0.91497, -0.28118354, -0.698855, 0.0012511816, 0.71526223, -0.65409166, 0.40351993, -0.63979346, 2, -1.9591883, 2)
+operation = 2
+size = Vector3(0.33923537, 0.75259626, 0.5362331)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_12" type="CSGBox3D" parent="WearGenerator/Column2" unique_id=1357731983]
+transform = Transform3D(-0.5647451, -0.18927628, 0.8032667, -0.07549471, 0.98111117, 0.17810497, -0.821805, 0.039941512, -0.56836706, 2, 1.6708822, 2)
+operation = 2
+size = Vector3(0.52886236, 0.4196666, 0.33776614)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_13" type="CSGBox3D" parent="WearGenerator/Column2" unique_id=1165821283]
+transform = Transform3D(-0.013995977, -0.9669007, 0.25476873, -0.98808527, -0.02568196, -0.15174988, 0.15327002, -0.2538571, -0.95502084, -2, -0.49557638, 2)
+operation = 2
+size = Vector3(0.4086004, 0.33987418, 0.58927935)
+metadata/wear_chunk = true
+
+[node name="Column3" parent="WearGenerator" unique_id=391365902 instance=ExtResource("5_fo5ed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.25, 7, 19.5)
+size = Vector3(4, 13, 4)
+
+[node name="WearChunk_4_0" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=1081406600]
+transform = Transform3D(-0.34815362, 0.4180435, -0.83906424, -0.11756864, -0.90746593, -0.40334013, -0.9300358, -0.041776687, 0.36508635, 2, -2.420844, 2)
+operation = 2
+size = Vector3(0.4739688, 0.54856503, 0.39308095)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_1" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=2057104860]
+transform = Transform3D(0.9159797, 0.399979, 0.03159215, 0.08810977, -0.12370926, -0.988399, -0.39143062, 0.908137, -0.14855722, -2, -1.7702289, 2)
+operation = 2
+size = Vector3(0.30431455, 0.7499109, 0.5916545)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_2" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=1903499089]
+transform = Transform3D(0.91280293, -0.38366634, 0.13996768, 0.37581682, 0.65496063, -0.65558237, 0.15985154, 0.6510197, 0.7420383, 2, 4.082309, 2)
+operation = 2
+size = Vector3(0.4405253, 0.31482163, 0.38064077)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_3" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=1502726204]
+transform = Transform3D(-0.96927124, 0.18737724, 0.15938284, 0.027800813, 0.72720134, -0.685861, -0.24441814, -0.6603544, -0.71006465, -2, 4.1292286, -2)
+operation = 2
+size = Vector3(0.45059964, 0.55715585, 0.39701933)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_4" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=1015071235]
+transform = Transform3D(-0.89745003, 0.44085237, -0.015251502, 0.024399335, 0.015088855, -0.99958843, -0.44044086, -0.89745283, -0.024297997, -2, 2.9090528, 2)
+operation = 2
+size = Vector3(0.45768476, 0.74121726, 0.41256627)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_5" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=1238263554]
+transform = Transform3D(0.61775774, 0.23735195, 0.7496929, 0.4730776, 0.64936996, -0.5954126, -0.62815046, 0.72248363, 0.28886744, 2, 1.3260555, 2)
+operation = 2
+size = Vector3(0.40517938, 0.4221902, 0.44903386)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_6" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=805203567]
+transform = Transform3D(0.94868326, -0.1264, -0.28986725, 0.06459612, -0.81985337, 0.56891805, -0.30955988, -0.5584473, -0.76961625, -2, -1.3195057, -2)
+operation = 2
+size = Vector3(0.49103978, 0.7699582, 0.4093737)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_7" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=1199012904]
+transform = Transform3D(0.21172425, -0.86323804, 0.45824984, -0.51733637, 0.29881284, 0.801919, -0.82917786, -0.40685493, -0.3833185, -2, 1.0258656, -2)
+operation = 2
+size = Vector3(0.35137415, 0.3243125, 0.44148326)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_8" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=1562729962]
+transform = Transform3D(-0.32778537, 0.23519921, 0.9150072, 0.8012462, -0.44394368, 0.40114656, 0.500561, 0.86463594, -0.042934246, -2, -1.9608879, -2)
+operation = 2
+size = Vector3(0.47647333, 0.41216314, 0.5080885)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_9" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=670612508]
+transform = Transform3D(-0.49489558, -0.19412157, -0.84699184, -0.11881098, 0.9806898, -0.15534274, 0.8607916, 0.023753494, -0.5084028, -2, 4.1191416, 2)
+operation = 2
+size = Vector3(0.5286089, 0.597461, 0.34636465)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_10" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=742244110]
+transform = Transform3D(0.80409133, -0.4898914, 0.33681375, 0.18398318, -0.33367613, -0.9245596, 0.5653205, 0.8053984, -0.17817432, -2, -5.2299247, 2)
+operation = 2
+size = Vector3(0.43860942, 0.42328572, 0.5635664)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_11" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=162943796]
+transform = Transform3D(-0.1744222, -0.98425245, -0.028705478, -0.17188382, 0.001729373, 0.9851157, -0.9695529, 0.17676006, -0.16947871, 2, 5.124115, 2)
+operation = 2
+size = Vector3(0.46130347, 0.7080138, 0.48413014)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_12" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=949613160]
+transform = Transform3D(0.14278343, -0.7588165, -0.6354608, -0.56031597, 0.46727744, -0.6838844, 0.8158792, 0.45370618, -0.3584575, -2, 6.391762, 2)
+operation = 2
+size = Vector3(0.4385292, 0.49707544, 0.49873438)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_13" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=1216934160]
+transform = Transform3D(0.28929928, 0.08842096, -0.95314616, 0.11405964, 0.98544663, 0.12603681, 0.95041907, -0.14517787, 0.27500373, -2, -0.07665777, 2)
+operation = 2
+size = Vector3(0.52279156, 0.3504338, 0.5538844)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_14" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=8174349]
+transform = Transform3D(-0.79570657, -0.32181117, 0.5131166, 0.07726836, 0.7863147, 0.61297536, -0.6007334, 0.5273962, -0.60081, -2, -4.253256, -2)
+operation = 2
+size = Vector3(0.39146417, 0.4543925, 0.5943801)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_15" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=703856623]
+transform = Transform3D(-0.9624473, 0.14545187, -0.2292139, -0.17338072, 0.32035455, 0.93129593, 0.20888847, 0.9360645, -0.2831058, -2, -3.38248, -2)
+operation = 2
+size = Vector3(0.56329834, 0.34085268, 0.45208257)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_16" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=1212911001]
+transform = Transform3D(-0.9014311, -0.16749404, -0.39920893, 0.115367115, -0.9817186, 0.15139067, -0.4172679, 0.09041267, 0.9042749, -2, -0.8792567, 2)
+operation = 2
+size = Vector3(0.5407873, 0.53003144, 0.5477865)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_17" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=1236838555]
+transform = Transform3D(-0.6094187, -0.76040155, -0.22449574, -0.71904874, 0.4107807, 0.5605606, -0.33403265, 0.5030395, -0.79710317, -2, 5.072263, 2)
+operation = 2
+size = Vector3(0.59909475, 0.7985037, 0.48559174)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_18" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=688328953]
+transform = Transform3D(0.7776288, 0.11429706, -0.6182472, -0.6102374, -0.09948818, -0.78594685, -0.1513397, 0.9884525, -0.0076165264, 2, -5.4340034, -2)
+operation = 2
+size = Vector3(0.4234956, 0.5462556, 0.543661)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_19" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=797632962]
+transform = Transform3D(0.17035973, 0.9475666, 0.27036098, -0.29401886, 0.3107546, -0.90387195, -0.94049484, 0.07449216, 0.33154255, -2, 5.3614902, -2)
+operation = 2
+size = Vector3(0.514194, 0.5248383, 0.3823115)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_20" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=110421411]
+transform = Transform3D(-0.16290903, -0.7679939, 0.61939156, -0.67535096, -0.3708623, -0.6374655, 0.7192786, -0.5221556, -0.45824862, -2, 0.49357224, 2)
+operation = 2
+size = Vector3(0.5299258, 0.6661402, 0.35710892)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_21" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=393053319]
+transform = Transform3D(-0.5383787, 0.096478164, -0.83716214, 0.6736176, -0.54764044, -0.49631572, -0.5063474, -0.8311329, 0.22984858, -2, -2.407538, 2)
+operation = 2
+size = Vector3(0.43108162, 0.33670235, 0.5212945)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_22" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=1333961524]
+transform = Transform3D(-0.6447223, -0.67074, 0.36666194, -0.677065, 0.72373, 0.13340834, -0.3548466, -0.16224265, -0.9207395, -2, 1.4029794, -2)
+operation = 2
+size = Vector3(0.346396, 0.3887317, 0.3642798)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_23" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=1306958009]
+transform = Transform3D(0.19816685, 0.93355054, 0.298686, -0.2610871, 0.34399483, -0.90194297, -0.9447558, 0.100752115, 0.31190634, 2, -4.72503, -2)
+operation = 2
+size = Vector3(0.34052524, 0.6418003, 0.30552107)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_24" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=1578515754]
+transform = Transform3D(0.5591571, -0.8247685, -0.084263295, -0.8180649, -0.532384, -0.21757083, 0.13458514, 0.1905891, -0.9724005, -2, 6.388976, -2)
+operation = 2
+size = Vector3(0.5243192, 0.46855703, 0.35799384)
+metadata/wear_chunk = true
+
+[node name="WearChunk_4_25" type="CSGBox3D" parent="WearGenerator/Column3" unique_id=373806427]
+transform = Transform3D(-0.74420136, -0.6657281, 0.054501895, -0.015794376, -0.064033695, -0.99782276, 0.6677686, -0.7434418, 0.037139203, -2, -4.3685064, 2)
+operation = 2
+size = Vector3(0.30264488, 0.37683266, 0.52083045)
+metadata/wear_chunk = true

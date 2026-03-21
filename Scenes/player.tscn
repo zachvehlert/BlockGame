@@ -247,19 +247,22 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x3wgy"]
 xfade_time = 0.3
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gymyn"]
+xfade_time = 0.3
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7yui6"]
 states/End/position = Vector2(1250, 300.45078)
 states/Start/position = Vector2(283.63635, 99.58678)
 states/airborne/node = SubResource("AnimationNodeAnimation_vgqql")
 states/airborne/position = Vector2(745.862, 246.25598)
 states/grounded/node = SubResource("AnimationNodeBlendSpace1D_k7acu")
-states/grounded/position = Vector2(495.281, 100.43528)
+states/grounded/position = Vector2(494.619, 99.82278)
 states/jump/node = SubResource("AnimationNodeAnimation_fo5ed")
 states/jump/position = Vector2(745.8575, 100.85083)
 states/land/node = SubResource("AnimationNodeAnimation_6t5aa")
 states/land/position = Vector2(495.00732, 246.22456)
-transitions = ["Start", "grounded", SubResource("AnimationNodeStateMachineTransition_5v1tr"), "land", "grounded", SubResource("AnimationNodeStateMachineTransition_fkybt"), "grounded", "jump", SubResource("AnimationNodeStateMachineTransition_0fj1v"), "jump", "airborne", SubResource("AnimationNodeStateMachineTransition_vgqql"), "airborne", "land", SubResource("AnimationNodeStateMachineTransition_x3wgy")]
-graph_offset = Vector2(-311.36588, -23.520744)
+transitions = ["Start", "grounded", SubResource("AnimationNodeStateMachineTransition_5v1tr"), "land", "grounded", SubResource("AnimationNodeStateMachineTransition_fkybt"), "grounded", "jump", SubResource("AnimationNodeStateMachineTransition_0fj1v"), "jump", "airborne", SubResource("AnimationNodeStateMachineTransition_vgqql"), "airborne", "land", SubResource("AnimationNodeStateMachineTransition_x3wgy"), "grounded", "airborne", SubResource("AnimationNodeStateMachineTransition_gymyn")]
+graph_offset = Vector2(-223.36588, 65.685486)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fd4e3"]
 streams_count = 4
@@ -272,7 +275,6 @@ stream_3/stream = ExtResource("12_h4iuc")
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
 script = ExtResource("1_cvnsp")
 AIR_SPEED = 20.0
-RESTAGE_SPEED = 1.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=847620094]
 transform = Transform3D(1.0000019, 0, 0, 0, 1, 0, 0, 0, 1.0000019, 0, 0, 0)
@@ -299,7 +301,7 @@ libraries/ = SubResource("AnimationLibrary_o06y3")
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=151416858]
 tree_root = SubResource("AnimationNodeStateMachine_7yui6")
 anim_player = NodePath("../AnimationPlayer")
-parameters/grounded/blend_position = 0.0
+parameters/grounded/blend_position = -0.0088067055
 
 [node name="WalkSounds" type="AudioStreamPlayer" parent="." unique_id=160914230]
 volume_db = -5.0

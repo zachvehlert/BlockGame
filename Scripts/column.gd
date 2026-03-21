@@ -1,3 +1,4 @@
+class_name Column
 extends CSGBox3D
 ## Interactive column that drops into the ground when the player interacts with it,
 ## waits at the bottom, then accelerates back up to launch the player into the air.
@@ -26,6 +27,7 @@ enum State { IDLE, DROP_DELAY, DROPPING, WAITING, RISING }
 @onready var _snd_activate: AudioStream = _audio.stream.get_list_stream(0)
 @onready var _snd_drop: AudioStream = _audio.stream.get_list_stream(1)
 @onready var _snd_land: AudioStream = _audio.stream.get_list_stream(2)
+@onready var _snd_superjump: AudioStreamPlayer = $SuperJumpSounds
 
 var player: CharacterBody3D = null
 var player_on_column: bool = false
@@ -34,6 +36,7 @@ var origin_y: float     # the column's starting Y, so it knows where to return t
 var drop_target_y: float # how far down to drop (origin_y - size.y)
 var rise_speed: float    # current upward speed, increases each frame during RISING
 var _connector: Node = null # child connector that can hold the column down with power
+var _audio_target_player: CharacterBody3D = null # player ref kept for audio tracking
 
 func _ready() -> void:
 	origin_y = position.y
@@ -77,12 +80,14 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body is CharacterBody3D:
 		player = body
 		player.interact.connect(_on_player_interact)
+		player.jumped.connect(_on_player_jumped)
 		player_on_column = true
 
 # When the player leaves, stop listening so other columns can respond instead
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body == player:
 		player.interact.disconnect(_on_player_interact)
+		player.jumped.disconnect(_on_player_jumped)
 		player_on_column = false
 		player = null
 
@@ -91,9 +96,19 @@ func _play_sound(stream: AudioStream) -> void:
 	_audio.stream = stream
 	_audio.play()
 
+func _update_audio_height() -> void:
+	if _audio_target_player:
+		_audio.position.y = minf(_audio_target_player.global_position.y - global_position.y, size.y / 2.0)
+
+func _on_player_jumped() -> void:
+	if state == State.RISING:
+		player.start_superjump_fov()
+
 func _on_player_interact() -> void:
 	if state != State.IDLE:
 		return
+	_audio_target_player = player
+	_update_audio_height()
 	_play_sound(_snd_activate)
 	# Drop by the full height of the column so it sinks flush with the ground
 	drop_target_y = origin_y - size.y + 0.1
@@ -107,6 +122,7 @@ func _on_player_interact() -> void:
 func _process(delta: float) -> void:
 	match state:
 		State.DROPPING:
+			_update_audio_height()
 			# Move down at a constant speed
 			position.y = move_toward(position.y, drop_target_y, drop_speed * delta)
 			if is_equal_approx(position.y, drop_target_y):
@@ -116,11 +132,13 @@ func _process(delta: float) -> void:
 				_bottom_timer.start()
 
 		State.WAITING:
+			_update_audio_height()
 			# Stay down indefinitely while a child connector is powered
 			if _connector and _connector.powered:
 				_bottom_timer.start()
 
 		State.RISING:
+			_update_audio_height()
 			# Accelerate upward — sqrt(size.y) makes taller columns rise
 			# faster overall while keeping small columns from being too snappy
 			rise_speed += rise_acceleration * sqrt(size.y) * delta
@@ -136,10 +154,18 @@ func _process(delta: float) -> void:
 
 			# Column reached the top — launch the player and go back to idle
 			if is_equal_approx(position.y, origin_y):
-				_audio.stop()
+				_play_sound(_snd_land)
 				if player_on_column and player:
-					player.velocity.y = rise_speed * launch_multiplier
+					# SUPERJUMP
+					if player.velocity.y >= 3:
+						player.velocity.y = rise_speed * launch_multiplier + player.velocity.y
+						_snd_superjump.play()
+					# if no jump, launch them anyway
+					if player.is_on_floor():
+						player.velocity.y = rise_speed * launch_multiplier
 				state = State.IDLE
+				_audio.position.y = 0.0
+				_audio_target_player = null
 
 func _on_drop_delay_timeout() -> void:
 	_play_sound(_snd_drop)
