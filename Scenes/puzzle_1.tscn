@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://37xfqq5p0qr" path="res://Assets/block_activate.wav" id="11_20ibb"]
 [ext_resource type="AudioStream" uid="uid://3iyyhpaon3kg" path="res://Assets/block_drop.wav" id="12_bc0aw"]
 [ext_resource type="AudioStream" uid="uid://depm6ridkm83g" path="res://Assets/block_land.wav" id="13_y4g23"]
+[ext_resource type="PackedScene" path="res://Scenes/power_source.tscn" id="14_20ibb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6he5u"]
 sky_top_color = Color(0.5803922, 0.77254903, 0.8509804, 1)
@@ -127,6 +128,12 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7, 0
 
 [node name="ConnectorStraight9" parent="FreeConnectors" unique_id=1085869693 instance=ExtResource("7_6he5u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -1)
+
+[node name="PowerSource2" parent="." unique_id=2103182906 instance=ExtResource("14_20ibb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 1.5)
+
+[node name="PowerSource" parent="." unique_id=174511942 instance=ExtResource("14_20ibb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -6.5)
 
 [node name="PowerLock" parent="." unique_id=1506979964 instance=ExtResource("10_8yig3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.5)
