@@ -3,6 +3,8 @@ extends Node3D
 signal power_changed(is_powered: bool)
 
 @onready var power_area: Area3D = $PowerArea
+@onready var anim_tree: AnimationTree = $AnimationTree
+@onready var state_machine: AnimationNodeStateMachinePlayback = anim_tree.get("parameters/playback")
 
 var powered: bool = false
 var _tracked_connectors: Array[Connector] = []
@@ -36,4 +38,8 @@ func _check_power() -> void:
 			powered = true
 			break
 	if powered != was_powered:
+		if powered:
+			state_machine.travel("power_on")
+		else:
+			state_machine.travel("power_off")
 		power_changed.emit(powered)
