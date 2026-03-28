@@ -27,7 +27,7 @@ emission_energy_multiplier = 0.0
 size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="Animation" id="Animation_qj4nx"]
-length = 0.001
+length = 1.1333333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://byrd3q2g3f14n"]
 
 [ext_resource type="Script" uid="uid://ckvg5v1nfdvbg" path="res://Scripts/column.gd" id="1_nmhdn"]
+[ext_resource type="Material" uid="uid://cahhxc6e0ai1o" path="res://Resources/Materials/blocks.tres" id="1_vbeq1"]
 [ext_resource type="AudioStream" uid="uid://37xfqq5p0qr" path="res://Assets/block_activate.wav" id="2_7sqlp"]
 [ext_resource type="AudioStream" uid="uid://3iyyhpaon3kg" path="res://Assets/block_drop.wav" id="3_d16ys"]
 [ext_resource type="AudioStream" uid="uid://depm6ridkm83g" path="res://Assets/block_land.wav" id="4_vbeq1"]
@@ -13,6 +14,7 @@ stream_1 = ExtResource("3_d16ys")
 stream_2 = ExtResource("4_vbeq1")
 
 [node name="Column" type="CSGBox3D" unique_id=1838435091]
+material_override = ExtResource("1_vbeq1")
 use_collision = true
 size = Vector3(4, 4, 4)
 script = ExtResource("1_nmhdn")

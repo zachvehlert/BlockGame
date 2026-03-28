@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://4pbjw3vqklpe"]
 
-[ext_resource type="Material" uid="uid://bkjw8iibm5v8k" path="res://Resources/Materials/ground.tres" id="1_5wffj"]
 [ext_resource type="PackedScene" uid="uid://cvbcr0470tjtw" path="res://Scenes/player.tscn" id="2_jesp8"]
 [ext_resource type="Script" uid="uid://cup175gyx0lky" path="res://Scripts/column_wear.gd" id="4_8yig3"]
 [ext_resource type="PackedScene" uid="uid://byrd3q2g3f14n" path="res://Scenes/column.tscn" id="4_qguuj"]
@@ -16,6 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://d3efw5h6etw7i" path="res://Scenes/power_source.tscn" id="14_20ibb"]
 [ext_resource type="AudioStream" uid="uid://bjhyygsl5lv4f" path="res://Assets/ambiance.wav" id="15_bc0aw"]
 [ext_resource type="AudioStream" uid="uid://dakul42hwtdqo" path="res://Assets/superjump.wav" id="15_y4g23"]
+[ext_resource type="Script" uid="uid://cddg1xr5hye1d" path="res://addons/MarchingSquaresTerrain/algorithm/terrain/marching_squares_terrain.gd" id="16_pnuok"]
+[ext_resource type="Script" uid="uid://cql4d8s5t5xcx" path="res://addons/MarchingSquaresTerrain/algorithm/terrain/marching_squares_terrain_chunk.gd" id="17_kxp6t"]
+[ext_resource type="Script" uid="uid://22l7ysgniux3" path="res://addons/MarchingSquaresTerrain/algorithm/grass/marching_squares_grass_planter.gd" id="18_5xwju"]
+[ext_resource type="Material" uid="uid://cahhxc6e0ai1o" path="res://Resources/Materials/blocks.tres" id="19_kxp6t"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6he5u"]
 sky_top_color = Color(0.5803922, 0.77254903, 0.8509804, 1)
@@ -33,18 +36,19 @@ ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 glow_enabled = true
+fog_enabled = true
 fog_mode = 1
-fog_light_color = Color(0.31709173, 0.51418024, 0.59373134, 1)
-fog_density = 1.0
-fog_sky_affect = 0.0
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_qguuj"]
-size = Vector2(300, 300)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6he5u"]
-points = PackedVector3Array(-150, 0, -150, -150, 0, 150, 150, 0, -150, 150, 0, 150)
+fog_sun_scatter = 0.5
+fog_density = 0.55
+fog_aerial_perspective = 0.5
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_0pk2v"]
+stream_count = 3
+stream_0 = ExtResource("11_20ibb")
+stream_1 = ExtResource("12_bc0aw")
+stream_2 = ExtResource("13_y4g23")
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_pnuok"]
 stream_count = 3
 stream_0 = ExtResource("11_20ibb")
 stream_1 = ExtResource("12_bc0aw")
@@ -64,94 +68,31 @@ stream_2 = ExtResource("13_y4g23")
 environment = SubResource("Environment_w6xic")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Env" unique_id=2038308061]
-transform = Transform3D(0.7071068, -0.61237246, 0.35355327, 2.7805946e-08, 0.49999994, 0.86602545, -0.7071067, -0.6123725, 0.35355338, 0, 0, 0)
+transform = Transform3D(-0.44202217, 0.4707584, -0.76354647, -0.38024512, 0.6726168, 0.6348232, 0.81242245, 0.5709406, -0.11830792, 2.5545292, 12.5, 0)
 light_color = Color(0.9372549, 0.78039217, 0.5647059, 1)
+light_energy = 1.5
 shadow_enabled = true
 
-[node name="Ground" type="MeshInstance3D" parent="." unique_id=2093947366]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10.5)
-material_override = ExtResource("1_5wffj")
-mesh = SubResource("PlaneMesh_qguuj")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Ground" unique_id=1022233546]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground/StaticBody3D" unique_id=1607648473]
-shape = SubResource("ConvexPolygonShape3D_6he5u")
-
 [node name="Player" parent="." unique_id=783204240 instance=ExtResource("2_jesp8")]
-transform = Transform3D(-0.5000001, 0, 0.8660255, 0, 1, 0, -0.8660255, 0, -0.5000001, -4, 15.5, -17.5)
+transform = Transform3D(0.7071068, 0, 0.70710695, 0, 1, 0, -0.70710695, 0, 0.7071068, 31, 1.5, -5.5)
 
 [node name="ExitDoor" parent="." unique_id=91984872 instance=ExtResource("9_6he5u")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -23, 17, -18.5)
-power_locks = Array[NodePath]([NodePath("../PowerLock"), NodePath("../PowerLock2")])
+transform = Transform3D(0.7071067, 0, 0.7071068, 0, 1, 0, -0.7071068, 0, 0.7071067, -43, 17, -36)
+power_locks = Array[NodePath]([NodePath("../PowerItems/PowerLock"), NodePath("../PowerItems/PowerLock2")])
 
 [node name="EnvBlocks" type="CSGCombiner3D" parent="." unique_id=1369986168]
+visible = false
 use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="EnvBlocks" unique_id=1597356478]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5, 8.5, -16.25)
 size = Vector3(7, 17, 17.5)
 
-[node name="FreeConnectors" type="Node3D" parent="." unique_id=584000069]
-
-[node name="ConnectorStraight2" parent="FreeConnectors" unique_id=31341810 instance=ExtResource("7_6he5u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -9)
-
-[node name="ConnectorStraight3" parent="FreeConnectors" unique_id=2077787924 instance=ExtResource("7_6he5u")]
-transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 0, -13)
-
-[node name="ConnectorCorner" parent="FreeConnectors" unique_id=67998486 instance=ExtResource("6_cmxtg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -13)
-
-[node name="ConnectorCorner2" parent="FreeConnectors" unique_id=1576909129 instance=ExtResource("6_cmxtg")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 10, 0, -6.5)
-
-[node name="ConnectorStraight" parent="FreeConnectors" unique_id=187004618 instance=ExtResource("7_6he5u")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 13.5, 0, -6.5)
-
-[node name="ConnectorStraight4" parent="FreeConnectors" unique_id=638706761 instance=ExtResource("7_6he5u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10.5)
-
-[node name="ConnectorCorner3" parent="FreeConnectors" unique_id=501538030 instance=ExtResource("6_cmxtg")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 0, -13)
-
-[node name="ConnectorStraight5" parent="FreeConnectors" unique_id=283077391 instance=ExtResource("7_6he5u")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4, 0, -13)
-
-[node name="ConnectorStraight6" parent="FreeConnectors" unique_id=1931088241 instance=ExtResource("7_6he5u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -9)
-
-[node name="ConnectorStraight7" parent="FreeConnectors" unique_id=1281983642 instance=ExtResource("7_6he5u")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 0, -5)
-
-[node name="ConnectorStraight8" parent="FreeConnectors" unique_id=1703283561 instance=ExtResource("7_6he5u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1)
-
-[node name="ConnectorCorner4" parent="FreeConnectors" unique_id=48762758 instance=ExtResource("6_cmxtg")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4, 0, 3)
-
-[node name="ConnectorHalf" parent="FreeConnectors" unique_id=498816605 instance=ExtResource("9_8yig3")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7, 0, -13)
-
-[node name="ConnectorStraight9" parent="FreeConnectors" unique_id=1085869693 instance=ExtResource("7_6he5u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -1)
-
-[node name="PowerSource2" parent="." unique_id=2103182906 instance=ExtResource("14_20ibb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 1.5)
-
-[node name="PowerSource" parent="." unique_id=174511942 instance=ExtResource("14_20ibb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -6.5)
-
-[node name="PowerLock" parent="." unique_id=1506979964 instance=ExtResource("10_8yig3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.5)
-
-[node name="PowerLock2" parent="." unique_id=1217258266 instance=ExtResource("10_8yig3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 3)
-
 [node name="BackgroundBlocks" type="Node3D" parent="." unique_id=1041218238]
+visible = false
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="BackgroundBlocks" unique_id=767074072]
-use_collision = true
+visible = false
 
 [node name="CSGBox3D" type="CSGBox3D" parent="BackgroundBlocks/CSGCombiner3D" unique_id=540199197]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 6.5)
@@ -238,12 +179,238 @@ size = Vector3(43.5, 39.5, 24)
 transform = Transform3D(0.9659258, 0, 0.25881904, 0, 1, 0, -0.25881904, 0, 0.9659258, -16, 18, 11.5)
 size = Vector3(25, 37, 24)
 
+[node name="FreeConnectors" type="Node3D" parent="." unique_id=584000069]
+
+[node name="ConnectorStraight2" parent="FreeConnectors" unique_id=31341810 instance=ExtResource("7_6he5u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -9)
+
+[node name="ConnectorStraight3" parent="FreeConnectors" unique_id=2077787924 instance=ExtResource("7_6he5u")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 0, 0, -13)
+
+[node name="ConnectorCorner" parent="FreeConnectors" unique_id=67998486 instance=ExtResource("6_cmxtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -13)
+
+[node name="ConnectorCorner2" parent="FreeConnectors" unique_id=1576909129 instance=ExtResource("6_cmxtg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 10, 0, -6.5)
+
+[node name="ConnectorStraight" parent="FreeConnectors" unique_id=187004618 instance=ExtResource("7_6he5u")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 13.5, 0, -6.5)
+
+[node name="ConnectorStraight4" parent="FreeConnectors" unique_id=638706761 instance=ExtResource("7_6he5u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10.5)
+
+[node name="ConnectorCorner3" parent="FreeConnectors" unique_id=501538030 instance=ExtResource("6_cmxtg")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 0, -13)
+
+[node name="ConnectorStraight5" parent="FreeConnectors" unique_id=283077391 instance=ExtResource("7_6he5u")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 4, 0, -13)
+
+[node name="ConnectorStraight6" parent="FreeConnectors" unique_id=1931088241 instance=ExtResource("7_6he5u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -9)
+
+[node name="ConnectorStraight7" parent="FreeConnectors" unique_id=1281983642 instance=ExtResource("7_6he5u")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -8, 0, -5)
+
+[node name="ConnectorStraight8" parent="FreeConnectors" unique_id=1703283561 instance=ExtResource("7_6he5u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1)
+
+[node name="ConnectorCorner4" parent="FreeConnectors" unique_id=48762758 instance=ExtResource("6_cmxtg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4, 0, 3)
+
+[node name="ConnectorHalf" parent="FreeConnectors" unique_id=498816605 instance=ExtResource("9_8yig3")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7, 0, -13)
+
+[node name="ConnectorStraight9" parent="FreeConnectors" unique_id=1085869693 instance=ExtResource("7_6he5u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -1)
+
+[node name="PowerItems" type="Node3D" parent="." unique_id=1751838520]
+
+[node name="PowerSource2" parent="PowerItems" unique_id=2103182906 instance=ExtResource("14_20ibb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 1.5)
+
+[node name="PowerSource" parent="PowerItems" unique_id=174511942 instance=ExtResource("14_20ibb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -6.5)
+
+[node name="PowerLock" parent="PowerItems" unique_id=1506979964 instance=ExtResource("10_8yig3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.5)
+
+[node name="PowerLock2" parent="PowerItems" unique_id=1217258266 instance=ExtResource("10_8yig3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 3)
+
 [node name="WearGenerator" type="CSGCombiner3D" parent="." unique_id=2110263521]
 use_collision = true
 script = ExtResource("4_8yig3")
 chunks_per_unit = 1.0
 chunk_size_min = Vector3(0.3, 0.4, 0.5)
 metadata/_custom_type_script = "uid://cup175gyx0lky"
+
+[node name="MarchingSquaresTerrain" type="Node3D" parent="." unique_id=1613001027]
+script = ExtResource("16_pnuok")
+data_directory = "res://Scenes/puzzle_1_TerrainData/MarchingSquaresTerrain_71ed8f1a"
+_storage_initialized = true
+use_ledge_texture = false
+texture_albedo_1 = Color(0.6405694, 0.548152, 0.3487798, 1)
+texture_albedo_6 = Color(0.7607843, 0.7529412, 0.73333335, 1)
+texture_scale_5 = 1.1
+metadata/_custom_type_script = "uid://cddg1xr5hye1d"
+
+[node name="Chunk (0, 0)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=1140506865 node_paths=PackedStringArray("terrain_system")]
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (0, 0)" unique_id=1728205192]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (0, -1)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=837619586 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -64)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(0, -1)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (0, -1)" unique_id=938311147]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (-1, -1)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=1067167636 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, -64)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-1, -1)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (-1, -1)" unique_id=1870543693]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (-1, 0)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=62431373 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 0)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-1, 0)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (-1, 0)" unique_id=540570521]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (0, -2)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=1725835232 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -128)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(0, -2)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (0, -2)" unique_id=1164630311]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (-1, -2)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=842492392 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, -128)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-1, -2)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (-1, -2)" unique_id=447686193]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (-2, -2)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=1268556889 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128, 0, -128)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-2, -2)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (-2, -2)" unique_id=675717589]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (-2, -1)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=1605334840 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128, 0, -64)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-2, -1)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (-2, -1)" unique_id=906883769]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (-2, 0)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=448545996 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128, 0, 0)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-2, 0)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (-2, 0)" unique_id=872327503]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (-2, 1)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=1797820171 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128, 0, 64)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-2, 1)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (-2, 1)" unique_id=1328697239]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (-1, 1)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=781897648 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64, 0, 64)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(-1, 1)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (-1, 1)" unique_id=1814381686]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (0, 1)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=1548747818 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 64)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(0, 1)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (0, 1)" unique_id=264180797]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (1, 1)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=1910520733 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 64)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(1, 1)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (1, 1)" unique_id=188687884]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (1, 0)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=1045614864 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 0)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(1, 0)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (1, 0)" unique_id=764349104]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (1, -1)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=1207927075 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, -64)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(1, -1)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (1, -1)" unique_id=618215805]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
+
+[node name="Chunk (1, -2)" type="MeshInstance3D" parent="MarchingSquaresTerrain" unique_id=710305699 node_paths=PackedStringArray("terrain_system")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, -128)
+script = ExtResource("17_kxp6t")
+terrain_system = NodePath("..")
+chunk_coords = Vector2i(1, -2)
+
+[node name="GrassPlanter" type="MultiMeshInstance3D" parent="MarchingSquaresTerrain/Chunk (1, -2)" unique_id=286290464]
+cast_shadow = 0
+script = ExtResource("18_5xwju")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=214143337]
 stream = ExtResource("15_bc0aw")
@@ -268,27 +435,42 @@ stream = SubResource("AudioStreamPlaylist_0pk2v")
 [node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column" unique_id=1063107649]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column" unique_id=1915016394]
+[node name="DropDelay3" type="Timer" parent="Column" unique_id=422322613]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column" unique_id=1618649436]
+[node name="BottomTime3" type="Timer" parent="Column" unique_id=1003267860]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column" unique_id=507024720]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column" unique_id=1397053978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+stream = SubResource("AudioStreamPlaylist_pnuok")
+
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column" unique_id=1655038290]
+stream = ExtResource("15_y4g23")
+
+[node name="DropDelay4" type="Timer" parent="Column" unique_id=1915016394]
+wait_time = 0.5
+one_shot = true
+
+[node name="BottomTime4" type="Timer" parent="Column" unique_id=1618649436]
+wait_time = 3.0
+one_shot = true
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column" unique_id=507024720]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay4" type="Timer" parent="Column" unique_id=119147591]
+[node name="DropDelay5" type="Timer" parent="Column" unique_id=119147591]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column" unique_id=111785872]
+[node name="BottomTime5" type="Timer" parent="Column" unique_id=111785872]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column" unique_id=874924527]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column" unique_id=874924527]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -380,42 +562,57 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 7, -5)
 size = Vector3(4, 14, 4)
 
-[node name="DropDelay2" type="Timer" parent="Column8" unique_id=1825224920]
+[node name="DropDelay2" type="Timer" parent="Column8" unique_id=1501589151]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column8" unique_id=60927913]
+[node name="BottomTime2" type="Timer" parent="Column8" unique_id=669541632]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column8" unique_id=1273200527]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column8" unique_id=2081905259]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column8" unique_id=1990086017]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column8" unique_id=1064292591]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column8" unique_id=487343542]
+[node name="DropDelay3" type="Timer" parent="Column8" unique_id=1825224920]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column8" unique_id=1777288588]
+[node name="BottomTime3" type="Timer" parent="Column8" unique_id=60927913]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column8" unique_id=552724109]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column8" unique_id=1273200527]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+stream = SubResource("AudioStreamPlaylist_pnuok")
+
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column8" unique_id=1990086017]
+stream = ExtResource("15_y4g23")
+
+[node name="DropDelay4" type="Timer" parent="Column8" unique_id=487343542]
+wait_time = 0.5
+one_shot = true
+
+[node name="BottomTime4" type="Timer" parent="Column8" unique_id=1777288588]
+wait_time = 3.0
+one_shot = true
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column8" unique_id=552724109]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay4" type="Timer" parent="Column8" unique_id=1100927493]
+[node name="DropDelay5" type="Timer" parent="Column8" unique_id=1100927493]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column8" unique_id=1572350309]
+[node name="BottomTime5" type="Timer" parent="Column8" unique_id=1572350309]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column8" unique_id=378211553]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column8" unique_id=378211553]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -510,42 +707,57 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 7, -5)
 size = Vector3(4, 14, 4)
 
-[node name="DropDelay2" type="Timer" parent="Column10" unique_id=273171190]
+[node name="DropDelay2" type="Timer" parent="Column10" unique_id=397548212]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column10" unique_id=1310918113]
+[node name="BottomTime2" type="Timer" parent="Column10" unique_id=1657396671]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column10" unique_id=1657655940]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column10" unique_id=1837584041]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column10" unique_id=913550107]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column10" unique_id=1548973712]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column10" unique_id=1462586974]
+[node name="DropDelay3" type="Timer" parent="Column10" unique_id=273171190]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column10" unique_id=782585843]
+[node name="BottomTime3" type="Timer" parent="Column10" unique_id=1310918113]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column10" unique_id=999007085]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column10" unique_id=1657655940]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+stream = SubResource("AudioStreamPlaylist_pnuok")
+
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column10" unique_id=913550107]
+stream = ExtResource("15_y4g23")
+
+[node name="DropDelay4" type="Timer" parent="Column10" unique_id=1462586974]
+wait_time = 0.5
+one_shot = true
+
+[node name="BottomTime4" type="Timer" parent="Column10" unique_id=782585843]
+wait_time = 3.0
+one_shot = true
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column10" unique_id=999007085]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay4" type="Timer" parent="Column10" unique_id=63244882]
+[node name="DropDelay5" type="Timer" parent="Column10" unique_id=63244882]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column10" unique_id=924413682]
+[node name="BottomTime5" type="Timer" parent="Column10" unique_id=924413682]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column10" unique_id=2069710177]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column10" unique_id=2069710177]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -640,42 +852,57 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -17.25)
 size = Vector3(4, 9, 4.5)
 
-[node name="DropDelay2" type="Timer" parent="Column2" unique_id=35462302]
+[node name="DropDelay2" type="Timer" parent="Column2" unique_id=759636182]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column2" unique_id=1698751356]
+[node name="BottomTime2" type="Timer" parent="Column2" unique_id=760454620]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column2" unique_id=1471034474]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column2" unique_id=91128921]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column2" unique_id=1010040854]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column2" unique_id=1589742659]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column2" unique_id=1700595869]
+[node name="DropDelay3" type="Timer" parent="Column2" unique_id=35462302]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column2" unique_id=583288987]
+[node name="BottomTime3" type="Timer" parent="Column2" unique_id=1698751356]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column2" unique_id=761685965]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column2" unique_id=1471034474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+stream = SubResource("AudioStreamPlaylist_pnuok")
+
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column2" unique_id=1010040854]
+stream = ExtResource("15_y4g23")
+
+[node name="DropDelay4" type="Timer" parent="Column2" unique_id=1700595869]
+wait_time = 0.5
+one_shot = true
+
+[node name="BottomTime4" type="Timer" parent="Column2" unique_id=583288987]
+wait_time = 3.0
+one_shot = true
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column2" unique_id=761685965]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay4" type="Timer" parent="Column2" unique_id=1204252510]
+[node name="DropDelay5" type="Timer" parent="Column2" unique_id=1204252510]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column2" unique_id=153226009]
+[node name="BottomTime5" type="Timer" parent="Column2" unique_id=153226009]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column2" unique_id=1272998383]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column2" unique_id=1272998383]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -740,42 +967,57 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, -17)
 size = Vector3(4, 6, 5)
 
-[node name="DropDelay2" type="Timer" parent="Column3" unique_id=968896237]
+[node name="DropDelay2" type="Timer" parent="Column3" unique_id=929839396]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column3" unique_id=1676403209]
+[node name="BottomTime2" type="Timer" parent="Column3" unique_id=961222057]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column3" unique_id=1255476071]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column3" unique_id=423804049]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column3" unique_id=1167466806]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column3" unique_id=225508096]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column3" unique_id=1166600562]
+[node name="DropDelay3" type="Timer" parent="Column3" unique_id=968896237]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column3" unique_id=1841617104]
+[node name="BottomTime3" type="Timer" parent="Column3" unique_id=1676403209]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column3" unique_id=1548744964]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column3" unique_id=1255476071]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+stream = SubResource("AudioStreamPlaylist_pnuok")
+
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column3" unique_id=1167466806]
+stream = ExtResource("15_y4g23")
+
+[node name="DropDelay4" type="Timer" parent="Column3" unique_id=1166600562]
+wait_time = 0.5
+one_shot = true
+
+[node name="BottomTime4" type="Timer" parent="Column3" unique_id=1841617104]
+wait_time = 3.0
+one_shot = true
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column3" unique_id=1548744964]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay4" type="Timer" parent="Column3" unique_id=700354833]
+[node name="DropDelay5" type="Timer" parent="Column3" unique_id=700354833]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column3" unique_id=998566086]
+[node name="BottomTime5" type="Timer" parent="Column3" unique_id=998566086]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column3" unique_id=1676575381]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column3" unique_id=1676575381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -822,42 +1064,57 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.25, -17)
 size = Vector3(4, 4.5, 4)
 
-[node name="DropDelay2" type="Timer" parent="Column4" unique_id=1359348079]
+[node name="DropDelay2" type="Timer" parent="Column4" unique_id=1514501348]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column4" unique_id=1370197152]
+[node name="BottomTime2" type="Timer" parent="Column4" unique_id=1365069444]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column4" unique_id=1864929547]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column4" unique_id=2004478000]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column4" unique_id=542893258]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column4" unique_id=761056831]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column4" unique_id=770372050]
+[node name="DropDelay3" type="Timer" parent="Column4" unique_id=1359348079]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column4" unique_id=858258919]
+[node name="BottomTime3" type="Timer" parent="Column4" unique_id=1370197152]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column4" unique_id=62036917]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column4" unique_id=1864929547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+stream = SubResource("AudioStreamPlaylist_pnuok")
+
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column4" unique_id=542893258]
+stream = ExtResource("15_y4g23")
+
+[node name="DropDelay4" type="Timer" parent="Column4" unique_id=770372050]
+wait_time = 0.5
+one_shot = true
+
+[node name="BottomTime4" type="Timer" parent="Column4" unique_id=858258919]
+wait_time = 3.0
+one_shot = true
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column4" unique_id=62036917]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay4" type="Timer" parent="Column4" unique_id=904134921]
+[node name="DropDelay5" type="Timer" parent="Column4" unique_id=904134921]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column4" unique_id=834675449]
+[node name="BottomTime5" type="Timer" parent="Column4" unique_id=834675449]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column4" unique_id=1022943535]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column4" unique_id=1022943535]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -898,42 +1155,57 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2.25, -17)
 size = Vector3(4, 4.5, 5)
 
-[node name="DropDelay2" type="Timer" parent="Column5" unique_id=1848729599]
+[node name="DropDelay2" type="Timer" parent="Column5" unique_id=1871774101]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column5" unique_id=1965288413]
+[node name="BottomTime2" type="Timer" parent="Column5" unique_id=2143255572]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column5" unique_id=1468989023]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column5" unique_id=674549300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column5" unique_id=1130808091]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column5" unique_id=728627560]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column5" unique_id=1264582732]
+[node name="DropDelay3" type="Timer" parent="Column5" unique_id=1848729599]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column5" unique_id=598315054]
+[node name="BottomTime3" type="Timer" parent="Column5" unique_id=1965288413]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column5" unique_id=942217002]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column5" unique_id=1468989023]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+stream = SubResource("AudioStreamPlaylist_pnuok")
+
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column5" unique_id=1130808091]
+stream = ExtResource("15_y4g23")
+
+[node name="DropDelay4" type="Timer" parent="Column5" unique_id=1264582732]
+wait_time = 0.5
+one_shot = true
+
+[node name="BottomTime4" type="Timer" parent="Column5" unique_id=598315054]
+wait_time = 3.0
+one_shot = true
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column5" unique_id=942217002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay4" type="Timer" parent="Column5" unique_id=287604861]
+[node name="DropDelay5" type="Timer" parent="Column5" unique_id=287604861]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column5" unique_id=646792853]
+[node name="BottomTime5" type="Timer" parent="Column5" unique_id=646792853]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column5" unique_id=2079795491]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column5" unique_id=2079795491]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -974,42 +1246,57 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1.5, -17)
 size = Vector3(4, 3, 4)
 
-[node name="DropDelay2" type="Timer" parent="Column6" unique_id=1612531994]
+[node name="DropDelay2" type="Timer" parent="Column6" unique_id=291571499]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column6" unique_id=997928003]
+[node name="BottomTime2" type="Timer" parent="Column6" unique_id=1242876265]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column6" unique_id=900667083]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column6" unique_id=1052512693]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column6" unique_id=17146351]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column6" unique_id=274014116]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column6" unique_id=1041237582]
+[node name="DropDelay3" type="Timer" parent="Column6" unique_id=1612531994]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column6" unique_id=1277454666]
+[node name="BottomTime3" type="Timer" parent="Column6" unique_id=997928003]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column6" unique_id=2118811240]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column6" unique_id=900667083]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+stream = SubResource("AudioStreamPlaylist_pnuok")
+
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column6" unique_id=17146351]
+stream = ExtResource("15_y4g23")
+
+[node name="DropDelay4" type="Timer" parent="Column6" unique_id=1041237582]
+wait_time = 0.5
+one_shot = true
+
+[node name="BottomTime4" type="Timer" parent="Column6" unique_id=1277454666]
+wait_time = 3.0
+one_shot = true
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column6" unique_id=2118811240]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay4" type="Timer" parent="Column6" unique_id=2063698514]
+[node name="DropDelay5" type="Timer" parent="Column6" unique_id=2063698514]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column6" unique_id=66074755]
+[node name="BottomTime5" type="Timer" parent="Column6" unique_id=66074755]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column6" unique_id=1767772186]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column6" unique_id=1767772186]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -1038,42 +1325,57 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0.75, -13)
 size = Vector3(4, 1.5, 4)
 
-[node name="DropDelay2" type="Timer" parent="Column7" unique_id=1975034465]
+[node name="DropDelay2" type="Timer" parent="Column7" unique_id=978123817]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column7" unique_id=1283635609]
+[node name="BottomTime2" type="Timer" parent="Column7" unique_id=996059302]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column7" unique_id=180248245]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column7" unique_id=185619896]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column7" unique_id=1183329461]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column7" unique_id=2144199767]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column7" unique_id=233577291]
+[node name="DropDelay3" type="Timer" parent="Column7" unique_id=1975034465]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column7" unique_id=433446373]
+[node name="BottomTime3" type="Timer" parent="Column7" unique_id=1283635609]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column7" unique_id=1607412926]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column7" unique_id=180248245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+stream = SubResource("AudioStreamPlaylist_pnuok")
+
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column7" unique_id=1183329461]
+stream = ExtResource("15_y4g23")
+
+[node name="DropDelay4" type="Timer" parent="Column7" unique_id=233577291]
+wait_time = 0.5
+one_shot = true
+
+[node name="BottomTime4" type="Timer" parent="Column7" unique_id=433446373]
+wait_time = 3.0
+one_shot = true
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column7" unique_id=1607412926]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay4" type="Timer" parent="Column7" unique_id=1026274496]
+[node name="DropDelay5" type="Timer" parent="Column7" unique_id=1026274496]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column7" unique_id=1693455090]
+[node name="BottomTime5" type="Timer" parent="Column7" unique_id=1693455090]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column7" unique_id=195595829]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column7" unique_id=195595829]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -1090,4 +1392,384 @@ metadata/wear_chunk = true
 transform = Transform3D(0.6488547, -0.7476206, -0.14160194, 0.08555461, -0.11323409, 0.989878, -0.7560873, -0.65440166, -0.009510083, 2, -0.13764518, 2)
 operation = 2
 size = Vector3(0.39390138, 0.5365248, 0.5403058)
+metadata/wear_chunk = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1379651789]
+material_override = ExtResource("19_kxp6t")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=113831135]
+transform = Transform3D(0.74651223, 0.41001445, 0.52404237, 0.22942843, -0.89790356, 0.37569302, 0.62457913, -0.1602304, -0.7643537, 17.663397, 5.0757785, -32.21663)
+size = Vector3(5, 19.5, 5)
+
+[node name="WearChunk_0_0" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=1872530491]
+transform = Transform3D(0.23742965, -0.74365795, 0.62498, 0.7220006, 0.5655223, 0.39862216, -0.6498787, 0.35659117, 0.6711933, 2.5, -2.2790294, -2.5)
+operation = 2
+size = Vector3(0.3502025, 0.561517, 0.585529)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_1" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=818299418]
+transform = Transform3D(-0.5789046, -0.24297513, 0.77835244, 0.37627518, 0.76725155, 0.5193669, -0.7233854, 0.59353864, -0.35273996, -2.5, -3.2413278, 2.5)
+operation = 2
+size = Vector3(0.5792723, 0.46647006, 0.5658106)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_2" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=204532243]
+transform = Transform3D(-0.71137327, -0.0879504, 0.69728965, -0.69513386, -0.05822751, -0.7165183, 0.103619516, -0.99442154, -0.019715812, -2.5, -8.776865, 2.5)
+operation = 2
+size = Vector3(0.5644081, 0.48481077, 0.5333809)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_3" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=1892283369]
+transform = Transform3D(0.72256327, -0.6710162, 0.16625185, 0.36756152, 0.16922632, -0.91447306, 0.585492, 0.7218724, 0.36891645, 2.5, -5.601438, 2.5)
+operation = 2
+size = Vector3(0.43560508, 0.7556306, 0.55906045)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_4" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=1263027685]
+transform = Transform3D(0.7753538, -0.589494, -0.22654676, 0.08176268, -0.26200694, 0.9615962, -0.626212, -0.7641003, -0.15494946, -2.5, 4.93958, -2.5)
+operation = 2
+size = Vector3(0.46116877, 0.6809415, 0.55991405)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_5" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=1431136091]
+transform = Transform3D(0.41845778, -0.69496304, 0.5847389, -0.4228505, 0.42071086, 0.80262065, -0.80379766, -0.5831199, -0.11781574, 2.5, 6.5100155, -2.5)
+operation = 2
+size = Vector3(0.46133822, 0.48093313, 0.5403837)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_6" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=1154704982]
+transform = Transform3D(0.62468034, 0.49815318, 0.6013467, -0.722296, 0.6612621, 0.20253599, -0.29675382, -0.5608706, 0.7728915, -2.5, 6.332329, 2.5)
+operation = 2
+size = Vector3(0.3935166, 0.74688005, 0.5221254)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_7" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=560108963]
+transform = Transform3D(-0.5359997, -0.8404196, -0.0799949, -0.72492677, 0.50675106, -0.46656665, 0.43264925, -0.19208916, -0.88086116, -2.5, 0.18402195, 2.5)
+operation = 2
+size = Vector3(0.47731823, 0.4430018, 0.5651546)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_8" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=567777646]
+transform = Transform3D(0.09288317, 0.61267066, -0.7848614, 0.9724077, -0.22524007, -0.060746614, -0.2139999, -0.75756294, -0.61668664, 2.5, -1.6018438, 2.5)
+operation = 2
+size = Vector3(0.5218072, 0.6686523, 0.5007918)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_9" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=1856970482]
+transform = Transform3D(-0.6844921, 0.18687484, -0.70466197, 0.7286919, 0.14637122, -0.6690169, -0.021880224, -0.9714182, -0.23636413, -2.5, 0.85127354, -2.5)
+operation = 2
+size = Vector3(0.49213716, 0.46983114, 0.5740454)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_10" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=186443108]
+transform = Transform3D(0.014058173, 0.7872226, -0.61650866, -0.5761036, -0.4975679, -0.64848346, -0.8172558, 0.3642894, 0.44652689, 2.5, -9.498804, 2.5)
+operation = 2
+size = Vector3(0.33371252, 0.71564996, 0.52744675)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_11" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=1312109621]
+transform = Transform3D(-0.011554658, 0.9348934, -0.35474035, 0.08065494, -0.3527367, -0.93224007, -0.9966751, -0.039383262, -0.07132803, -2.5, -3.4899487, -2.5)
+operation = 2
+size = Vector3(0.33437437, 0.54434997, 0.5541424)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_12" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=383159076]
+transform = Transform3D(-0.76623535, 0.54261726, 0.34416538, 0.6152382, 0.4650179, 0.63658494, 0.18537897, 0.6995176, -0.69015205, 2.5, -7.44828, 2.5)
+operation = 2
+size = Vector3(0.49929225, 0.55611074, 0.540113)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_13" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=1040510362]
+transform = Transform3D(0.23261108, -0.9615232, -0.14616865, -0.5270845, -0.25093806, 0.81191874, -0.81735796, -0.111818045, -0.56517494, 2.5, 9.204706, 2.5)
+operation = 2
+size = Vector3(0.35283476, 0.4657889, 0.5890641)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_14" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=203030174]
+transform = Transform3D(-0.5132509, -0.08875616, -0.85363686, 0.7351683, -0.55867964, -0.3839332, -0.44283307, -0.8246207, 0.35199353, 2.5, 8.214653, -2.5)
+operation = 2
+size = Vector3(0.50151247, 0.421133, 0.5843523)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_15" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=1452779871]
+transform = Transform3D(0.41024455, -0.89497626, 0.17526257, 0.9117206, 0.39794102, -0.102022044, 0.021563135, 0.2016445, 0.9792214, 2.5, 5.8280153, -2.5)
+operation = 2
+size = Vector3(0.49028844, 0.69211626, 0.58185315)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_16" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=1444304227]
+transform = Transform3D(0.8576316, 0.1258928, -0.49861702, -0.23305699, -0.7691474, -0.5950602, -0.45842376, 0.6265487, -0.63030493, 2.5, 4.8369513, -2.5)
+operation = 2
+size = Vector3(0.35051566, 0.410335, 0.5986662)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_17" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=1483216505]
+transform = Transform3D(-0.8546367, -0.23565035, -0.46267167, 0.30759495, -0.9476672, -0.08551171, -0.41830787, -0.21539691, 0.88239604, 2.5, -8.757404, -2.5)
+operation = 2
+size = Vector3(0.36420986, 0.44953448, 0.5540241)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_18" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=1016307530]
+transform = Transform3D(0.33471003, -0.7904421, 0.51300156, 0.8099618, -0.036900938, -0.5853206, 0.48159227, 0.6114243, 0.62787676, 2.5, 3.4657154, 2.5)
+operation = 2
+size = Vector3(0.36115414, 0.73285925, 0.58165884)
+metadata/wear_chunk = true
+
+[node name="WearChunk_0_19" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D3" unique_id=1113274180]
+transform = Transform3D(0.5533303, -0.79974496, 0.23288105, -0.5522031, -0.5615116, -0.61626005, 0.6236163, 0.21239771, -0.752323, 2.5, 2.5593786, -2.5)
+operation = 2
+size = Vector3(0.44652608, 0.602973, 0.5989022)
+metadata/wear_chunk = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1230531350]
+transform = Transform3D(-0.595035, -0.6424021, -0.48296297, 0.4330127, 0.25, -0.86602545, 0.6770771, -0.72444445, 0.12940946, 10.984455, -0.62500006, 6)
+size = Vector3(4, 13.5, 4)
+
+[node name="WearChunk_1_0" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=2029387838]
+transform = Transform3D(-0.46140295, 0.87377936, -0.15367809, 0.49783435, 0.11161853, -0.86005944, -0.73434883, -0.4733402, -0.4864985, -2, -3.3275695, 2)
+operation = 2
+size = Vector3(0.43475923, 0.5969616, 0.52593726)
+metadata/wear_chunk = true
+
+[node name="WearChunk_1_1" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=401302504]
+transform = Transform3D(0.25589362, 0.57748926, -0.7752578, 0.08284888, -0.8121094, -0.5775936, -0.96314824, 0.08357329, -0.25565797, -2, -0.27324867, 2)
+operation = 2
+size = Vector3(0.4431076, 0.6416852, 0.52523744)
+metadata/wear_chunk = true
+
+[node name="WearChunk_1_2" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=1459059404]
+transform = Transform3D(-0.11600155, -0.99264807, -0.034546386, -0.030706573, -0.031180518, 0.999042, -0.99277425, 0.11695117, -0.026863834, 2, -5.3547626, -2)
+operation = 2
+size = Vector3(0.54694545, 0.63905907, 0.55315644)
+metadata/wear_chunk = true
+
+[node name="WearChunk_1_3" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=496693820]
+transform = Transform3D(-0.827828, -0.5552711, 0.07984275, -0.1849628, 0.40453464, 0.89562297, -0.52961266, 0.7266538, -0.43758956, -2, 2.2484493, 2)
+operation = 2
+size = Vector3(0.31701866, 0.72725064, 0.5183019)
+metadata/wear_chunk = true
+
+[node name="WearChunk_1_4" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=1379706222]
+transform = Transform3D(-0.99370253, -0.112016216, 0.0027534186, 0.06371816, -0.5851195, -0.80843997, 0.09216946, -0.80317336, 0.5885722, -2, -2.3363652, -2)
+operation = 2
+size = Vector3(0.39967623, 0.5824065, 0.5868259)
+metadata/wear_chunk = true
+
+[node name="WearChunk_1_5" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=936460125]
+transform = Transform3D(-0.77063036, 0.6278137, 0.10944767, -0.37867934, -0.3129791, -0.87100285, -0.51257265, -0.7126668, 0.47893128, 2, -5.605222, 2)
+operation = 2
+size = Vector3(0.5522567, 0.6315045, 0.5005483)
+metadata/wear_chunk = true
+
+[node name="WearChunk_1_6" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=958848696]
+transform = Transform3D(-0.8972196, 0.4367772, 0.06498285, 0.057282712, -0.030793967, 0.99788296, 0.4378536, 0.89904255, 0.0026091684, -2, 3.1172256, -2)
+operation = 2
+size = Vector3(0.47163355, 0.75614655, 0.521435)
+metadata/wear_chunk = true
+
+[node name="WearChunk_1_7" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=703735172]
+transform = Transform3D(-0.65934664, -0.596334, 0.45787308, 0.30221152, -0.7678537, -0.5648619, 0.6884258, -0.2340653, 0.6865008, 2, 1.4452085, -2)
+operation = 2
+size = Vector3(0.43446857, 0.4412765, 0.577659)
+metadata/wear_chunk = true
+
+[node name="WearChunk_1_8" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=596402577]
+transform = Transform3D(0.68613964, 0.49294513, 0.53499293, -0.20367686, 0.83617723, -0.509238, -0.6983753, 0.2404427, 0.67413586, -2, 4.2352476, -2)
+operation = 2
+size = Vector3(0.5401398, 0.4857241, 0.51593006)
+metadata/wear_chunk = true
+
+[node name="WearChunk_1_9" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=70098063]
+transform = Transform3D(0.40208966, 0.91495633, -0.034333967, -0.49890596, 0.18749958, -0.84613043, -0.76773477, 0.35734972, 0.5318688, 2, -2.370749, 2)
+operation = 2
+size = Vector3(0.40620255, 0.4191361, 0.5145332)
+metadata/wear_chunk = true
+
+[node name="WearChunk_1_10" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=1766221288]
+transform = Transform3D(-0.8476991, -0.5283829, -0.047093403, -0.025470477, -0.04813219, 0.9985162, -0.52986556, 0.84764075, 0.02734345, 2, 2.2123928, -2)
+operation = 2
+size = Vector3(0.3220761, 0.61992025, 0.59851456)
+metadata/wear_chunk = true
+
+[node name="WearChunk_1_11" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=975659779]
+transform = Transform3D(-0.45848495, 0.6535385, -0.6022282, -0.505922, 0.3651832, 0.78146285, 0.7306397, 0.66296947, 0.1632085, -2, 1.0021834, 2)
+operation = 2
+size = Vector3(0.40657806, 0.56859344, 0.55291414)
+metadata/wear_chunk = true
+
+[node name="WearChunk_1_12" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=1526064896]
+transform = Transform3D(0.26364535, -0.94393146, 0.1987071, 0.06848347, 0.22379163, 0.972228, -0.9621856, -0.24271522, 0.12364532, 2, 6.3747253, -2)
+operation = 2
+size = Vector3(0.57942224, 0.6124387, 0.5744658)
+metadata/wear_chunk = true
+
+[node name="WearChunk_1_13" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D" unique_id=467582885]
+transform = Transform3D(0.9456272, -0.110701725, -0.30583367, -0.14452127, 0.6993647, -0.70000184, 0.2913807, 0.7061402, 0.64533955, 2, 4.001849, -2)
+operation = 2
+size = Vector3(0.36512974, 0.69916904, 0.5833575)
+metadata/wear_chunk = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1707347973]
+transform = Transform3D(0.68183696, 0.42100602, -0.59820795, 0.11213915, -0.8682692, -0.48325318, -0.72285795, 0.2624171, -0.63922894, 26.60645, -2.3035264, 9.098797)
+material_override = ExtResource("19_kxp6t")
+size = Vector3(4, 13.5, 4)
+
+[node name="WearChunk_2_0" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D2" unique_id=98354347]
+transform = Transform3D(-0.7957667, -0.24687946, 0.5529971, 0.41393238, -0.88826895, 0.19909376, 0.44205803, 0.3873356, 0.80904627, -2, 1.1319399, -2)
+operation = 2
+size = Vector3(0.3192477, 0.5399748, 0.51661724)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_1" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D2" unique_id=767874382]
+transform = Transform3D(0.20955348, 0.8996194, 0.38310876, -0.73270756, -0.114974245, 0.67076117, 0.6474774, -0.42126703, 0.63506466, 2, -4.651975, 2)
+operation = 2
+size = Vector3(0.5801178, 0.5229138, 0.5053482)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_2" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D2" unique_id=2069546965]
+transform = Transform3D(0.41546875, -0.8420762, 0.34393832, 0.31703782, -0.22034858, -0.9224606, 0.8525684, 0.49229497, 0.17542201, -2, -6.445058, 2)
+operation = 2
+size = Vector3(0.47595808, 0.6542705, 0.54759467)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_3" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D2" unique_id=1863803041]
+transform = Transform3D(-0.20422524, -0.7840674, 0.5861147, 0.9711185, -0.2377277, 0.020358436, 0.12337331, 0.57334447, 0.8099723, 2, 0.7236066, 2)
+operation = 2
+size = Vector3(0.54076636, 0.7733887, 0.5372734)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_4" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D2" unique_id=1329449750]
+transform = Transform3D(0.035389483, -0.99246633, 0.11729567, -0.05059999, 0.11543921, 0.9920249, -0.99809176, -0.041042417, -0.046133447, -2, 3.1826134, -2)
+operation = 2
+size = Vector3(0.42414778, 0.582087, 0.57879233)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_5" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D2" unique_id=1132284882]
+transform = Transform3D(0.9998957, 0.0117100775, -0.008456675, -0.008353047, -0.008870353, -0.9999258, -0.011784166, 0.9998921, -0.008771612, 2, 6.604246, 2)
+operation = 2
+size = Vector3(0.5225373, 0.52011794, 0.56919575)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_6" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D2" unique_id=335685693]
+transform = Transform3D(-0.21899277, -0.94497585, -0.2430282, -0.042554453, -0.23958717, 0.9699418, -0.9747981, 0.22275215, 0.012254923, -2, 3.1913404, 2)
+operation = 2
+size = Vector3(0.5613425, 0.62327063, 0.5091568)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_7" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D2" unique_id=795021781]
+transform = Transform3D(-0.8163727, 0.23069797, -0.5294469, 0.24906537, 0.9677549, 0.03764104, 0.5210586, -0.10113779, -0.84750754, 2, 1.5796156, 2)
+operation = 2
+size = Vector3(0.3564243, 0.7012632, 0.5023708)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_8" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D2" unique_id=1072295683]
+transform = Transform3D(0.8332679, 0.22455089, 0.50521415, -0.5464405, 0.19555137, 0.81434786, 0.084067196, -0.9546395, 0.28565037, 2, -5.0448904, -2)
+operation = 2
+size = Vector3(0.4516099, 0.7706791, 0.5866293)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_9" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D2" unique_id=23205300]
+transform = Transform3D(0.9397784, 0.07994091, 0.33230406, 0.03346452, -0.98911244, 0.14330643, 0.3401421, -0.12355589, -0.93222165, -2, 6.4014454, -2)
+operation = 2
+size = Vector3(0.50353175, 0.7608844, 0.5937835)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_10" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D2" unique_id=445058236]
+transform = Transform3D(-0.59278965, 0.20028257, -0.78005594, -0.80390066, -0.20538321, 0.558177, -0.04841727, 0.957969, 0.28275633, -2, -1.8318787, -2)
+operation = 2
+size = Vector3(0.4592991, 0.75822014, 0.56347656)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_11" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D2" unique_id=1867413543]
+transform = Transform3D(0.11408447, -0.8906454, 0.440154, -0.13820389, -0.45296663, -0.8807502, 0.98381114, 0.03964892, -0.1747671, -2, 4.696315, 2)
+operation = 2
+size = Vector3(0.5068533, 0.64348066, 0.56094706)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_12" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D2" unique_id=1255822473]
+transform = Transform3D(0.6548344, -0.7553343, 0.025730753, -0.14412923, -0.09138668, 0.98533, -0.7419021, -0.6489365, -0.16870889, -2, -3.133724, -2)
+operation = 2
+size = Vector3(0.30074665, 0.40769646, 0.54882365)
+metadata/wear_chunk = true
+
+[node name="WearChunk_2_13" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D2" unique_id=993914721]
+transform = Transform3D(-0.80770296, 0.2545295, 0.5318183, -0.42502704, -0.87651014, -0.2260131, 0.4086171, -0.4085886, 0.8161418, -2, -1.7203574, 2)
+operation = 2
+size = Vector3(0.42339608, 0.7417253, 0.5103928)
+metadata/wear_chunk = true
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1624247883]
+transform = Transform3D(0.14881888, 0.06839508, 0.98649615, 0.18357745, -0.9821747, 0.04040168, 0.97167504, 0.17508611, -0.15872183, -8.433559, 4.297825, 10.794571)
+size = Vector3(4, 11.5, 4)
+
+[node name="WearChunk_3_0" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D4" unique_id=1695435445]
+transform = Transform3D(0.37657294, 0.1899921, 0.906695, 0.66256166, 0.6288161, -0.40694267, -0.64746034, 0.7539849, 0.11091365, 2, 5.5683784, 2)
+operation = 2
+size = Vector3(0.5961679, 0.42624658, 0.542346)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_1" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D4" unique_id=611062409]
+transform = Transform3D(0.76238954, -0.64335006, 0.06973545, -0.11464106, -0.02821701, 0.99300617, -0.6368828, -0.765052, -0.095266685, 2, 4.6401405, 2)
+operation = 2
+size = Vector3(0.4599687, 0.67303383, 0.56688416)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_2" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D4" unique_id=1129950805]
+transform = Transform3D(0.66849315, -0.73717713, 0.098421425, -0.048181057, 0.0891322, 0.9948538, -0.74215597, -0.66979504, 0.024066292, -2, -4.16224, -2)
+operation = 2
+size = Vector3(0.47829795, 0.64665484, 0.54044086)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_3" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D4" unique_id=524112232]
+transform = Transform3D(-0.5368522, -0.35102713, -0.76718295, 0.8403267, -0.14153107, -0.52327806, 0.07510458, -0.92560726, 0.37095878, 2, -4.0072227, -2)
+operation = 2
+size = Vector3(0.31516895, 0.7870823, 0.5778063)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_4" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D4" unique_id=1130483384]
+transform = Transform3D(0.57758284, 0.7506996, 0.32069954, -0.812674, 0.56591475, 0.13892943, -0.077194355, -0.34086746, 0.93693674, 2, 2.5825129, -2)
+operation = 2
+size = Vector3(0.4631195, 0.69760966, 0.5180116)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_5" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D4" unique_id=2010712083]
+transform = Transform3D(0.007412806, 0.99990696, 0.0114461435, -0.085165694, 0.0120361615, -0.9962941, -0.9963392, 0.0064105242, 0.085246995, 2, -0.7433357, -2)
+operation = 2
+size = Vector3(0.5292641, 0.71773076, 0.51472664)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_6" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D4" unique_id=132092137]
+transform = Transform3D(-0.00011872128, -0.20582621, 0.9785886, -0.98033035, -0.19311412, -0.04073656, 0.19736391, -0.95934486, -0.20175475, -2, -0.043031693, 2)
+operation = 2
+size = Vector3(0.31356072, 0.64663815, 0.55749226)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_7" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D4" unique_id=1729046874]
+transform = Transform3D(-0.9706177, 0.21538115, 0.107295446, 0.034583513, 0.56613386, -0.82358754, -0.23812881, -0.79567796, -0.5569481, -2, 3.052682, 2)
+operation = 2
+size = Vector3(0.39994746, 0.48634225, 0.5143144)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_8" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D4" unique_id=595328172]
+transform = Transform3D(-0.21975878, 0.28608182, -0.9326646, 0.9634495, 0.21378267, -0.16143762, 0.15320314, -0.93405247, -0.322606, -2, 2.3448687, -2)
+operation = 2
+size = Vector3(0.43379915, 0.45872426, 0.52567494)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_9" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D4" unique_id=867168227]
+transform = Transform3D(0.31317547, -0.9352921, -0.16477214, -0.47124436, -0.0024091383, -0.88199943, 0.8245301, 0.35386854, -0.44150558, -2, 5.1837645, 2)
+operation = 2
+size = Vector3(0.52848417, 0.5113415, 0.55900896)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_10" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D4" unique_id=2061581739]
+transform = Transform3D(-0.24919608, 0.34276667, 0.9057661, 0.3904049, -0.82035494, 0.41785368, 0.8862761, 0.45774308, 0.07061145, -2, 0.72764444, 2)
+operation = 2
+size = Vector3(0.38187823, 0.590621, 0.5103817)
+metadata/wear_chunk = true
+
+[node name="WearChunk_3_11" type="CSGBox3D" parent="CSGCombiner3D/CSGBox3D4" unique_id=87769752]
+transform = Transform3D(-0.715343, -0.22680211, 0.6609427, 0.686062, -0.048363768, 0.7259338, -0.13267763, 0.9727393, 0.19019699, 2, -4.16675, 2)
+operation = 2
+size = Vector3(0.3469942, 0.44074208, 0.55681837)
 metadata/wear_chunk = true

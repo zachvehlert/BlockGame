@@ -54,7 +54,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _physics_process(delta: float) -> void:
-	print(velocity.y)
 	if Input.is_action_just_pressed("interact"):
 		interact.emit()
 	if Input.is_action_just_pressed("rotate"):
