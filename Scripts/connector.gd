@@ -24,6 +24,8 @@ var powered: bool = false:
 		else:
 			_propagate_depower()
 
+var _is_rotating: bool = false
+
 func _ready() -> void:
 	power_col.area_entered.connect(_on_power_col_overlap)
 	power_col.area_exited.connect(_on_power_col_disconnect)
@@ -41,15 +43,26 @@ func _on_body_exited(body: Node3D) -> void:
 		body.rotate_pressed.disconnect(_on_rotate)
 
 func _on_rotate() -> void:
+	if _is_rotating:
+		return
+
+	_is_rotating = true
 	var was_powered := powered
 	if was_powered and not is_power_source:
 		powered = false
-	rotate_y(deg_to_rad(90))
+
+	# Animate rotation over 0.2 seconds
+	var tween := create_tween()
+	tween.tween_property(self, "rotation:y", rotation.y - deg_to_rad(90), 0.2)
+	await tween.finished
+
 	await get_tree().physics_frame
 	if _can_reach_source():
 		powered = true
 	elif was_powered:
 		_propagate_depower()
+
+	_is_rotating = false
 
 func _update_visual() -> void:
 	if power_line:
