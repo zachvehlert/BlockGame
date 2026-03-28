@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://bhcmjt6k0vo2s"]
 
 [ext_resource type="Script" uid="uid://wlpfkcymo42e" path="res://Scripts/connector.gd" id="1_script"]
+[ext_resource type="Material" uid="uid://cahhxc6e0ai1o" path="res://Resources/Materials/blocks.tres" id="2_ln0b5"]
 [ext_resource type="Material" uid="uid://ccqnpd1ryuhsp" path="res://Resources/Materials/powerstrip.tres" id="2_powerstrip"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wyb4h"]
@@ -35,6 +36,7 @@ size = Vector3(2, 2, 2)
 script = ExtResource("1_script")
 
 [node name="Rails" type="MeshInstance3D" parent="." unique_id=97007296]
+material_override = ExtResource("2_ln0b5")
 mesh = SubResource("ArrayMesh_wyb4h")
 
 [node name="PowerLine" type="MeshInstance3D" parent="." unique_id=766441140]

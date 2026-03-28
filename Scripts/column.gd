@@ -110,6 +110,7 @@ func _on_player_interact() -> void:
 	_audio_target_player = player
 	_update_audio_height()
 	_play_sound(_snd_activate)
+	player.apply_camera_shake(2.0)
 	# Drop by the full height of the column so it sinks flush with the ground
 	drop_target_y = origin_y - size.y + 0.1
 	if drop_delay > 0.0:
@@ -123,10 +124,15 @@ func _process(delta: float) -> void:
 	match state:
 		State.DROPPING:
 			_update_audio_height()
+			# Continuous shake while dropping
+			if player_on_column and player:
+				player.apply_camera_shake(0.2)
 			# Move down at a constant speed
 			position.y = move_toward(position.y, drop_target_y, drop_speed * delta)
 			if is_equal_approx(position.y, drop_target_y):
 				_play_sound(_snd_land)
+				if player_on_column and player:
+					player.apply_camera_shake(2.0)
 				state = State.WAITING
 				rise_speed = 0.0
 				_bottom_timer.start()
@@ -139,6 +145,9 @@ func _process(delta: float) -> void:
 
 		State.RISING:
 			_update_audio_height()
+			# Continuous shake while rising
+			if player_on_column and player:
+				player.apply_camera_shake(0.2)
 			# Accelerate upward — sqrt(size.y) makes taller columns rise
 			# faster overall while keeping small columns from being too snappy
 			rise_speed += rise_acceleration * sqrt(size.y) * delta
@@ -156,6 +165,7 @@ func _process(delta: float) -> void:
 			if is_equal_approx(position.y, origin_y):
 				_play_sound(_snd_land)
 				if player_on_column and player:
+					player.apply_camera_shake(2.0)
 					# SUPERJUMP
 					if player.velocity.y >= 3:
 						player.velocity.y = rise_speed * launch_multiplier + player.velocity.y

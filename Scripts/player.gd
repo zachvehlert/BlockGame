@@ -15,6 +15,7 @@ signal jumped
 
 # Camera Stuff
 @onready var camera_origin: Node3D = $CameraOrigin
+@onready var spring_arm: SpringArm3D = $CameraOrigin/SpringArm3D
 @onready var camera: Camera3D = $CameraOrigin/SpringArm3D/Camera3D
 
 # Animation stuff
@@ -27,9 +28,12 @@ signal jumped
 # Player Sounds
 @onready var jump_sounds: AudioStreamPlayer = $JumpSounds
 
-var max_height := -INF
 var _superjump_fov_active := false
 var _default_fov: float
+
+# Camera shake
+var _shake_strength: float = 0.0
+var _shake_decay: float = 5.0
 
 func emit_dust() -> void:
 	var dust := dust_scene.instantiate()
@@ -54,6 +58,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _physics_process(delta: float) -> void:
+	# Apply camera shake
+	if _shake_strength > 0:
+		spring_arm.rotation = Vector3(
+			randf_range(-_shake_strength, _shake_strength),
+			randf_range(-_shake_strength, _shake_strength),
+			randf_range(-_shake_strength, _shake_strength)
+		) * 0.01  # Convert to radians for subtle shake
+		_shake_strength = move_toward(_shake_strength, 0.0, _shake_decay * delta)
+	else:
+		spring_arm.rotation = Vector3.ZERO
+
 	if Input.is_action_just_pressed("interact"):
 		interact.emit()
 	if Input.is_action_just_pressed("rotate"):
@@ -110,10 +125,6 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	if global_position.y > max_height:
-		max_height = global_position.y
-		print("New max height: ", max_height)
-
 	# Blend toward walk (1) or idle (-1)
 	var target_blend := 1.0 if direction else -1.0
 	var current_blend: float = anim_tree["parameters/grounded/blend_position"]
@@ -123,3 +134,6 @@ func start_superjump_fov() -> void:
 	_superjump_fov_active = true
 	var tween := create_tween()
 	tween.tween_property(camera, "fov", 95.0, 0.15).set_ease(Tween.EASE_OUT)
+
+func apply_camera_shake(strength: float) -> void:
+	_shake_strength = strength
