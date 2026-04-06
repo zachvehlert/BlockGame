@@ -42,6 +42,12 @@ fog_sun_scatter = 0.5
 fog_density = 0.55
 fog_aerial_perspective = 0.5
 
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_4sbii"]
+stream_count = 3
+stream_0 = ExtResource("11_20ibb")
+stream_1 = ExtResource("12_bc0aw")
+stream_2 = ExtResource("13_y4g23")
+
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_0pk2v"]
 stream_count = 3
 stream_0 = ExtResource("11_20ibb")
@@ -67,12 +73,6 @@ stream_1 = ExtResource("12_bc0aw")
 stream_2 = ExtResource("13_y4g23")
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_pnuok"]
-stream_count = 3
-stream_0 = ExtResource("11_20ibb")
-stream_1 = ExtResource("12_bc0aw")
-stream_2 = ExtResource("13_y4g23")
-
-[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_4sbii"]
 stream_count = 3
 stream_0 = ExtResource("11_20ibb")
 stream_1 = ExtResource("12_bc0aw")
@@ -871,102 +871,7 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.25, 7, -17)
 size = Vector3(4.5, 14, 5)
 
-[node name="DropDelay" type="Timer" parent="Column" unique_id=1000414553]
-wait_time = 0.5
-one_shot = true
-
-[node name="BottomTime" type="Timer" parent="Column" unique_id=1578340840]
-wait_time = 3.0
-one_shot = true
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Column" unique_id=1102018613]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-stream = SubResource("AudioStreamPlaylist_0pk2v")
-
-[node name="SuperJumpSounds" type="AudioStreamPlayer" parent="Column" unique_id=1063107649]
-stream = ExtResource("15_y4g23")
-
-[node name="DropDelay2" type="Timer" parent="Column" unique_id=200393660]
-wait_time = 0.5
-one_shot = true
-
-[node name="BottomTime2" type="Timer" parent="Column" unique_id=828894951]
-wait_time = 3.0
-one_shot = true
-
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column" unique_id=1838131045]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-stream = SubResource("AudioStreamPlaylist_wgihu")
-
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column" unique_id=1814097889]
-stream = ExtResource("15_y4g23")
-
-[node name="DropDelay3" type="Timer" parent="Column" unique_id=922917673]
-wait_time = 0.5
-one_shot = true
-
-[node name="BottomTime3" type="Timer" parent="Column" unique_id=1970149337]
-wait_time = 3.0
-one_shot = true
-
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column" unique_id=1981591649]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-stream = SubResource("AudioStreamPlaylist_5xwju")
-
-[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column" unique_id=1500947673]
-stream = ExtResource("15_y4g23")
-
-[node name="DropDelay4" type="Timer" parent="Column" unique_id=107821813]
-wait_time = 0.5
-one_shot = true
-
-[node name="BottomTime4" type="Timer" parent="Column" unique_id=659283288]
-wait_time = 3.0
-one_shot = true
-
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column" unique_id=1307772760]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-stream = SubResource("AudioStreamPlaylist_kxp6t")
-
-[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column" unique_id=521765194]
-stream = ExtResource("15_y4g23")
-
-[node name="DropDelay5" type="Timer" parent="Column" unique_id=422322613]
-wait_time = 0.5
-one_shot = true
-
-[node name="BottomTime5" type="Timer" parent="Column" unique_id=1003267860]
-wait_time = 3.0
-one_shot = true
-
-[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column" unique_id=1397053978]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-stream = SubResource("AudioStreamPlaylist_pnuok")
-
-[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column" unique_id=1655038290]
-stream = ExtResource("15_y4g23")
-
-[node name="DropDelay6" type="Timer" parent="Column" unique_id=1915016394]
-wait_time = 0.5
-one_shot = true
-
-[node name="BottomTime6" type="Timer" parent="Column" unique_id=1618649436]
-wait_time = 3.0
-one_shot = true
-
-[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column" unique_id=507024720]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-stream = SubResource("AudioStreamPlaylist_4sbii")
-
-[node name="DropDelay7" type="Timer" parent="Column" unique_id=119147591]
-wait_time = 0.5
-one_shot = true
-
-[node name="BottomTime7" type="Timer" parent="Column" unique_id=111785872]
-wait_time = 3.0
-one_shot = true
-
-[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column" unique_id=874924527]
+[node name="AudioStreamPlayer3D8" type="AudioStreamPlayer3D" parent="Column" unique_id=874924527]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -1058,102 +963,102 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 7, -5)
 size = Vector3(4, 14, 4)
 
-[node name="DropDelay" type="Timer" parent="Column8" unique_id=506804174]
+[node name="DropDelay2" type="Timer" parent="Column8" unique_id=506804174]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime" type="Timer" parent="Column8" unique_id=205961009]
+[node name="BottomTime2" type="Timer" parent="Column8" unique_id=205961009]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Column8" unique_id=562507635]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column8" unique_id=562507635]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds" type="AudioStreamPlayer" parent="Column8" unique_id=1408183690]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column8" unique_id=1408183690]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay2" type="Timer" parent="Column8" unique_id=947053735]
+[node name="DropDelay3" type="Timer" parent="Column8" unique_id=947053735]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column8" unique_id=1227881181]
+[node name="BottomTime3" type="Timer" parent="Column8" unique_id=1227881181]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column8" unique_id=469674224]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column8" unique_id=469674224]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_wgihu")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column8" unique_id=946909838]
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column8" unique_id=946909838]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column8" unique_id=299420147]
+[node name="DropDelay4" type="Timer" parent="Column8" unique_id=299420147]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column8" unique_id=668408505]
+[node name="BottomTime4" type="Timer" parent="Column8" unique_id=668408505]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column8" unique_id=1024276589]
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column8" unique_id=1024276589]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_5xwju")
 
-[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column8" unique_id=1328766314]
+[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column8" unique_id=1328766314]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay4" type="Timer" parent="Column8" unique_id=1501589151]
+[node name="DropDelay5" type="Timer" parent="Column8" unique_id=1501589151]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column8" unique_id=669541632]
+[node name="BottomTime5" type="Timer" parent="Column8" unique_id=669541632]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column8" unique_id=2081905259]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column8" unique_id=2081905259]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_kxp6t")
 
-[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column8" unique_id=1064292591]
+[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column8" unique_id=1064292591]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay5" type="Timer" parent="Column8" unique_id=1825224920]
+[node name="DropDelay6" type="Timer" parent="Column8" unique_id=1825224920]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime5" type="Timer" parent="Column8" unique_id=60927913]
+[node name="BottomTime6" type="Timer" parent="Column8" unique_id=60927913]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column8" unique_id=1273200527]
+[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column8" unique_id=1273200527]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_pnuok")
 
-[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column8" unique_id=1990086017]
+[node name="SuperJumpSounds6" type="AudioStreamPlayer" parent="Column8" unique_id=1990086017]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay6" type="Timer" parent="Column8" unique_id=487343542]
+[node name="DropDelay7" type="Timer" parent="Column8" unique_id=487343542]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime6" type="Timer" parent="Column8" unique_id=1777288588]
+[node name="BottomTime7" type="Timer" parent="Column8" unique_id=1777288588]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column8" unique_id=552724109]
+[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column8" unique_id=552724109]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay7" type="Timer" parent="Column8" unique_id=1100927493]
+[node name="DropDelay8" type="Timer" parent="Column8" unique_id=1100927493]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime7" type="Timer" parent="Column8" unique_id=1572350309]
+[node name="BottomTime8" type="Timer" parent="Column8" unique_id=1572350309]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column8" unique_id=378211553]
+[node name="AudioStreamPlayer3D8" type="AudioStreamPlayer3D" parent="Column8" unique_id=378211553]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -1248,102 +1153,102 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 7, -5)
 size = Vector3(4, 14, 4)
 
-[node name="DropDelay" type="Timer" parent="Column10" unique_id=374910537]
+[node name="DropDelay2" type="Timer" parent="Column10" unique_id=374910537]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime" type="Timer" parent="Column10" unique_id=157171500]
+[node name="BottomTime2" type="Timer" parent="Column10" unique_id=157171500]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Column10" unique_id=1947301164]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column10" unique_id=1947301164]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds" type="AudioStreamPlayer" parent="Column10" unique_id=274603748]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column10" unique_id=274603748]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay2" type="Timer" parent="Column10" unique_id=665373874]
+[node name="DropDelay3" type="Timer" parent="Column10" unique_id=665373874]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column10" unique_id=297821436]
+[node name="BottomTime3" type="Timer" parent="Column10" unique_id=297821436]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column10" unique_id=33337468]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column10" unique_id=33337468]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_wgihu")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column10" unique_id=846219381]
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column10" unique_id=846219381]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column10" unique_id=1640754700]
+[node name="DropDelay4" type="Timer" parent="Column10" unique_id=1640754700]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column10" unique_id=584781731]
+[node name="BottomTime4" type="Timer" parent="Column10" unique_id=584781731]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column10" unique_id=884377071]
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column10" unique_id=884377071]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_5xwju")
 
-[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column10" unique_id=760947447]
+[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column10" unique_id=760947447]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay4" type="Timer" parent="Column10" unique_id=397548212]
+[node name="DropDelay5" type="Timer" parent="Column10" unique_id=397548212]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column10" unique_id=1657396671]
+[node name="BottomTime5" type="Timer" parent="Column10" unique_id=1657396671]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column10" unique_id=1837584041]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column10" unique_id=1837584041]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_kxp6t")
 
-[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column10" unique_id=1548973712]
+[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column10" unique_id=1548973712]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay5" type="Timer" parent="Column10" unique_id=273171190]
+[node name="DropDelay6" type="Timer" parent="Column10" unique_id=273171190]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime5" type="Timer" parent="Column10" unique_id=1310918113]
+[node name="BottomTime6" type="Timer" parent="Column10" unique_id=1310918113]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column10" unique_id=1657655940]
+[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column10" unique_id=1657655940]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_pnuok")
 
-[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column10" unique_id=913550107]
+[node name="SuperJumpSounds6" type="AudioStreamPlayer" parent="Column10" unique_id=913550107]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay6" type="Timer" parent="Column10" unique_id=1462586974]
+[node name="DropDelay7" type="Timer" parent="Column10" unique_id=1462586974]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime6" type="Timer" parent="Column10" unique_id=782585843]
+[node name="BottomTime7" type="Timer" parent="Column10" unique_id=782585843]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column10" unique_id=999007085]
+[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column10" unique_id=999007085]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay7" type="Timer" parent="Column10" unique_id=63244882]
+[node name="DropDelay8" type="Timer" parent="Column10" unique_id=63244882]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime7" type="Timer" parent="Column10" unique_id=924413682]
+[node name="BottomTime8" type="Timer" parent="Column10" unique_id=924413682]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column10" unique_id=2069710177]
+[node name="AudioStreamPlayer3D8" type="AudioStreamPlayer3D" parent="Column10" unique_id=2069710177]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -1438,102 +1343,102 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, -17.25)
 size = Vector3(4, 9, 4.5)
 
-[node name="DropDelay" type="Timer" parent="Column2" unique_id=366126140]
+[node name="DropDelay2" type="Timer" parent="Column2" unique_id=366126140]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime" type="Timer" parent="Column2" unique_id=598801346]
+[node name="BottomTime2" type="Timer" parent="Column2" unique_id=598801346]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Column2" unique_id=404022377]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column2" unique_id=404022377]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds" type="AudioStreamPlayer" parent="Column2" unique_id=930977616]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column2" unique_id=930977616]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay2" type="Timer" parent="Column2" unique_id=1852656211]
+[node name="DropDelay3" type="Timer" parent="Column2" unique_id=1852656211]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column2" unique_id=1174457888]
+[node name="BottomTime3" type="Timer" parent="Column2" unique_id=1174457888]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column2" unique_id=852948784]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column2" unique_id=852948784]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_wgihu")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column2" unique_id=741927172]
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column2" unique_id=741927172]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column2" unique_id=1790509169]
+[node name="DropDelay4" type="Timer" parent="Column2" unique_id=1790509169]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column2" unique_id=1227622123]
+[node name="BottomTime4" type="Timer" parent="Column2" unique_id=1227622123]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column2" unique_id=925510374]
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column2" unique_id=925510374]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_5xwju")
 
-[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column2" unique_id=791807508]
+[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column2" unique_id=791807508]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay4" type="Timer" parent="Column2" unique_id=759636182]
+[node name="DropDelay5" type="Timer" parent="Column2" unique_id=759636182]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column2" unique_id=760454620]
+[node name="BottomTime5" type="Timer" parent="Column2" unique_id=760454620]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column2" unique_id=91128921]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column2" unique_id=91128921]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_kxp6t")
 
-[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column2" unique_id=1589742659]
+[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column2" unique_id=1589742659]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay5" type="Timer" parent="Column2" unique_id=35462302]
+[node name="DropDelay6" type="Timer" parent="Column2" unique_id=35462302]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime5" type="Timer" parent="Column2" unique_id=1698751356]
+[node name="BottomTime6" type="Timer" parent="Column2" unique_id=1698751356]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column2" unique_id=1471034474]
+[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column2" unique_id=1471034474]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_pnuok")
 
-[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column2" unique_id=1010040854]
+[node name="SuperJumpSounds6" type="AudioStreamPlayer" parent="Column2" unique_id=1010040854]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay6" type="Timer" parent="Column2" unique_id=1700595869]
+[node name="DropDelay7" type="Timer" parent="Column2" unique_id=1700595869]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime6" type="Timer" parent="Column2" unique_id=583288987]
+[node name="BottomTime7" type="Timer" parent="Column2" unique_id=583288987]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column2" unique_id=761685965]
+[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column2" unique_id=761685965]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay7" type="Timer" parent="Column2" unique_id=1204252510]
+[node name="DropDelay8" type="Timer" parent="Column2" unique_id=1204252510]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime7" type="Timer" parent="Column2" unique_id=153226009]
+[node name="BottomTime8" type="Timer" parent="Column2" unique_id=153226009]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column2" unique_id=1272998383]
+[node name="AudioStreamPlayer3D8" type="AudioStreamPlayer3D" parent="Column2" unique_id=1272998383]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -1598,102 +1503,102 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, -17)
 size = Vector3(4, 6, 5)
 
-[node name="DropDelay" type="Timer" parent="Column3" unique_id=1204578169]
+[node name="DropDelay2" type="Timer" parent="Column3" unique_id=1204578169]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime" type="Timer" parent="Column3" unique_id=1295205052]
+[node name="BottomTime2" type="Timer" parent="Column3" unique_id=1295205052]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Column3" unique_id=1996914134]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column3" unique_id=1996914134]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds" type="AudioStreamPlayer" parent="Column3" unique_id=332744632]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column3" unique_id=332744632]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay2" type="Timer" parent="Column3" unique_id=1446524902]
+[node name="DropDelay3" type="Timer" parent="Column3" unique_id=1446524902]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column3" unique_id=1481848932]
+[node name="BottomTime3" type="Timer" parent="Column3" unique_id=1481848932]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column3" unique_id=163673919]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column3" unique_id=163673919]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_wgihu")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column3" unique_id=834317028]
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column3" unique_id=834317028]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column3" unique_id=1133382483]
+[node name="DropDelay4" type="Timer" parent="Column3" unique_id=1133382483]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column3" unique_id=1941261572]
+[node name="BottomTime4" type="Timer" parent="Column3" unique_id=1941261572]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column3" unique_id=1462214610]
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column3" unique_id=1462214610]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_5xwju")
 
-[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column3" unique_id=1749754324]
+[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column3" unique_id=1749754324]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay4" type="Timer" parent="Column3" unique_id=929839396]
+[node name="DropDelay5" type="Timer" parent="Column3" unique_id=929839396]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column3" unique_id=961222057]
+[node name="BottomTime5" type="Timer" parent="Column3" unique_id=961222057]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column3" unique_id=423804049]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column3" unique_id=423804049]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_kxp6t")
 
-[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column3" unique_id=225508096]
+[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column3" unique_id=225508096]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay5" type="Timer" parent="Column3" unique_id=968896237]
+[node name="DropDelay6" type="Timer" parent="Column3" unique_id=968896237]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime5" type="Timer" parent="Column3" unique_id=1676403209]
+[node name="BottomTime6" type="Timer" parent="Column3" unique_id=1676403209]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column3" unique_id=1255476071]
+[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column3" unique_id=1255476071]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_pnuok")
 
-[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column3" unique_id=1167466806]
+[node name="SuperJumpSounds6" type="AudioStreamPlayer" parent="Column3" unique_id=1167466806]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay6" type="Timer" parent="Column3" unique_id=1166600562]
+[node name="DropDelay7" type="Timer" parent="Column3" unique_id=1166600562]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime6" type="Timer" parent="Column3" unique_id=1841617104]
+[node name="BottomTime7" type="Timer" parent="Column3" unique_id=1841617104]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column3" unique_id=1548744964]
+[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column3" unique_id=1548744964]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay7" type="Timer" parent="Column3" unique_id=700354833]
+[node name="DropDelay8" type="Timer" parent="Column3" unique_id=700354833]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime7" type="Timer" parent="Column3" unique_id=998566086]
+[node name="BottomTime8" type="Timer" parent="Column3" unique_id=998566086]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column3" unique_id=1676575381]
+[node name="AudioStreamPlayer3D8" type="AudioStreamPlayer3D" parent="Column3" unique_id=1676575381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -1740,102 +1645,102 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2.25, -17)
 size = Vector3(4, 4.5, 4)
 
-[node name="DropDelay" type="Timer" parent="Column4" unique_id=2042131963]
+[node name="DropDelay2" type="Timer" parent="Column4" unique_id=2042131963]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime" type="Timer" parent="Column4" unique_id=199178328]
+[node name="BottomTime2" type="Timer" parent="Column4" unique_id=199178328]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Column4" unique_id=465918551]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column4" unique_id=465918551]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds" type="AudioStreamPlayer" parent="Column4" unique_id=1470572728]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column4" unique_id=1470572728]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay2" type="Timer" parent="Column4" unique_id=257198030]
+[node name="DropDelay3" type="Timer" parent="Column4" unique_id=257198030]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column4" unique_id=22756271]
+[node name="BottomTime3" type="Timer" parent="Column4" unique_id=22756271]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column4" unique_id=1326548255]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column4" unique_id=1326548255]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_wgihu")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column4" unique_id=401308228]
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column4" unique_id=401308228]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column4" unique_id=222950200]
+[node name="DropDelay4" type="Timer" parent="Column4" unique_id=222950200]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column4" unique_id=1741819072]
+[node name="BottomTime4" type="Timer" parent="Column4" unique_id=1741819072]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column4" unique_id=1704465268]
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column4" unique_id=1704465268]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_5xwju")
 
-[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column4" unique_id=1454550045]
+[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column4" unique_id=1454550045]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay4" type="Timer" parent="Column4" unique_id=1514501348]
+[node name="DropDelay5" type="Timer" parent="Column4" unique_id=1514501348]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column4" unique_id=1365069444]
+[node name="BottomTime5" type="Timer" parent="Column4" unique_id=1365069444]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column4" unique_id=2004478000]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column4" unique_id=2004478000]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_kxp6t")
 
-[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column4" unique_id=761056831]
+[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column4" unique_id=761056831]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay5" type="Timer" parent="Column4" unique_id=1359348079]
+[node name="DropDelay6" type="Timer" parent="Column4" unique_id=1359348079]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime5" type="Timer" parent="Column4" unique_id=1370197152]
+[node name="BottomTime6" type="Timer" parent="Column4" unique_id=1370197152]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column4" unique_id=1864929547]
+[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column4" unique_id=1864929547]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_pnuok")
 
-[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column4" unique_id=542893258]
+[node name="SuperJumpSounds6" type="AudioStreamPlayer" parent="Column4" unique_id=542893258]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay6" type="Timer" parent="Column4" unique_id=770372050]
+[node name="DropDelay7" type="Timer" parent="Column4" unique_id=770372050]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime6" type="Timer" parent="Column4" unique_id=858258919]
+[node name="BottomTime7" type="Timer" parent="Column4" unique_id=858258919]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column4" unique_id=62036917]
+[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column4" unique_id=62036917]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay7" type="Timer" parent="Column4" unique_id=904134921]
+[node name="DropDelay8" type="Timer" parent="Column4" unique_id=904134921]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime7" type="Timer" parent="Column4" unique_id=834675449]
+[node name="BottomTime8" type="Timer" parent="Column4" unique_id=834675449]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column4" unique_id=1022943535]
+[node name="AudioStreamPlayer3D8" type="AudioStreamPlayer3D" parent="Column4" unique_id=1022943535]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -1876,102 +1781,102 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2.25, -17)
 size = Vector3(4, 4.5, 5)
 
-[node name="DropDelay" type="Timer" parent="Column5" unique_id=1751604572]
+[node name="DropDelay2" type="Timer" parent="Column5" unique_id=1751604572]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime" type="Timer" parent="Column5" unique_id=68065942]
+[node name="BottomTime2" type="Timer" parent="Column5" unique_id=68065942]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Column5" unique_id=1374478395]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column5" unique_id=1374478395]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds" type="AudioStreamPlayer" parent="Column5" unique_id=351450060]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column5" unique_id=351450060]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay2" type="Timer" parent="Column5" unique_id=221095802]
+[node name="DropDelay3" type="Timer" parent="Column5" unique_id=221095802]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column5" unique_id=1775313388]
+[node name="BottomTime3" type="Timer" parent="Column5" unique_id=1775313388]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column5" unique_id=1134806391]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column5" unique_id=1134806391]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_wgihu")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column5" unique_id=1335085930]
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column5" unique_id=1335085930]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column5" unique_id=488312316]
+[node name="DropDelay4" type="Timer" parent="Column5" unique_id=488312316]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column5" unique_id=1043496288]
+[node name="BottomTime4" type="Timer" parent="Column5" unique_id=1043496288]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column5" unique_id=1722044367]
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column5" unique_id=1722044367]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_5xwju")
 
-[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column5" unique_id=108511388]
+[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column5" unique_id=108511388]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay4" type="Timer" parent="Column5" unique_id=1871774101]
+[node name="DropDelay5" type="Timer" parent="Column5" unique_id=1871774101]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column5" unique_id=2143255572]
+[node name="BottomTime5" type="Timer" parent="Column5" unique_id=2143255572]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column5" unique_id=674549300]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column5" unique_id=674549300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_kxp6t")
 
-[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column5" unique_id=728627560]
+[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column5" unique_id=728627560]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay5" type="Timer" parent="Column5" unique_id=1848729599]
+[node name="DropDelay6" type="Timer" parent="Column5" unique_id=1848729599]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime5" type="Timer" parent="Column5" unique_id=1965288413]
+[node name="BottomTime6" type="Timer" parent="Column5" unique_id=1965288413]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column5" unique_id=1468989023]
+[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column5" unique_id=1468989023]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_pnuok")
 
-[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column5" unique_id=1130808091]
+[node name="SuperJumpSounds6" type="AudioStreamPlayer" parent="Column5" unique_id=1130808091]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay6" type="Timer" parent="Column5" unique_id=1264582732]
+[node name="DropDelay7" type="Timer" parent="Column5" unique_id=1264582732]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime6" type="Timer" parent="Column5" unique_id=598315054]
+[node name="BottomTime7" type="Timer" parent="Column5" unique_id=598315054]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column5" unique_id=942217002]
+[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column5" unique_id=942217002]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay7" type="Timer" parent="Column5" unique_id=287604861]
+[node name="DropDelay8" type="Timer" parent="Column5" unique_id=287604861]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime7" type="Timer" parent="Column5" unique_id=646792853]
+[node name="BottomTime8" type="Timer" parent="Column5" unique_id=646792853]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column5" unique_id=2079795491]
+[node name="AudioStreamPlayer3D8" type="AudioStreamPlayer3D" parent="Column5" unique_id=2079795491]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -2012,102 +1917,102 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1.5, -17)
 size = Vector3(4, 3, 4)
 
-[node name="DropDelay" type="Timer" parent="Column6" unique_id=639511699]
+[node name="DropDelay2" type="Timer" parent="Column6" unique_id=639511699]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime" type="Timer" parent="Column6" unique_id=210910539]
+[node name="BottomTime2" type="Timer" parent="Column6" unique_id=210910539]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Column6" unique_id=189027370]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column6" unique_id=189027370]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds" type="AudioStreamPlayer" parent="Column6" unique_id=788603177]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column6" unique_id=788603177]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay2" type="Timer" parent="Column6" unique_id=1339693179]
+[node name="DropDelay3" type="Timer" parent="Column6" unique_id=1339693179]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column6" unique_id=1095766204]
+[node name="BottomTime3" type="Timer" parent="Column6" unique_id=1095766204]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column6" unique_id=1723565164]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column6" unique_id=1723565164]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_wgihu")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column6" unique_id=833470901]
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column6" unique_id=833470901]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column6" unique_id=1213630183]
+[node name="DropDelay4" type="Timer" parent="Column6" unique_id=1213630183]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column6" unique_id=337927319]
+[node name="BottomTime4" type="Timer" parent="Column6" unique_id=337927319]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column6" unique_id=1567378174]
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column6" unique_id=1567378174]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_5xwju")
 
-[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column6" unique_id=1360319991]
+[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column6" unique_id=1360319991]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay4" type="Timer" parent="Column6" unique_id=291571499]
+[node name="DropDelay5" type="Timer" parent="Column6" unique_id=291571499]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column6" unique_id=1242876265]
+[node name="BottomTime5" type="Timer" parent="Column6" unique_id=1242876265]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column6" unique_id=1052512693]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column6" unique_id=1052512693]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_kxp6t")
 
-[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column6" unique_id=274014116]
+[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column6" unique_id=274014116]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay5" type="Timer" parent="Column6" unique_id=1612531994]
+[node name="DropDelay6" type="Timer" parent="Column6" unique_id=1612531994]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime5" type="Timer" parent="Column6" unique_id=997928003]
+[node name="BottomTime6" type="Timer" parent="Column6" unique_id=997928003]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column6" unique_id=900667083]
+[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column6" unique_id=900667083]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_pnuok")
 
-[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column6" unique_id=17146351]
+[node name="SuperJumpSounds6" type="AudioStreamPlayer" parent="Column6" unique_id=17146351]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay6" type="Timer" parent="Column6" unique_id=1041237582]
+[node name="DropDelay7" type="Timer" parent="Column6" unique_id=1041237582]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime6" type="Timer" parent="Column6" unique_id=1277454666]
+[node name="BottomTime7" type="Timer" parent="Column6" unique_id=1277454666]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column6" unique_id=2118811240]
+[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column6" unique_id=2118811240]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay7" type="Timer" parent="Column6" unique_id=2063698514]
+[node name="DropDelay8" type="Timer" parent="Column6" unique_id=2063698514]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime7" type="Timer" parent="Column6" unique_id=66074755]
+[node name="BottomTime8" type="Timer" parent="Column6" unique_id=66074755]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column6" unique_id=1767772186]
+[node name="AudioStreamPlayer3D8" type="AudioStreamPlayer3D" parent="Column6" unique_id=1767772186]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
@@ -2136,102 +2041,102 @@ metadata/wear_chunk = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0.75, -13)
 size = Vector3(4, 1.5, 4)
 
-[node name="DropDelay" type="Timer" parent="Column7" unique_id=84068193]
+[node name="DropDelay2" type="Timer" parent="Column7" unique_id=84068193]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime" type="Timer" parent="Column7" unique_id=1471639352]
+[node name="BottomTime2" type="Timer" parent="Column7" unique_id=1471639352]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Column7" unique_id=603386578]
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column7" unique_id=603386578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_0pk2v")
 
-[node name="SuperJumpSounds" type="AudioStreamPlayer" parent="Column7" unique_id=1082770588]
+[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column7" unique_id=1082770588]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay2" type="Timer" parent="Column7" unique_id=435852949]
+[node name="DropDelay3" type="Timer" parent="Column7" unique_id=435852949]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime2" type="Timer" parent="Column7" unique_id=1262169120]
+[node name="BottomTime3" type="Timer" parent="Column7" unique_id=1262169120]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="Column7" unique_id=636911326]
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column7" unique_id=636911326]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_wgihu")
 
-[node name="SuperJumpSounds2" type="AudioStreamPlayer" parent="Column7" unique_id=1256059569]
+[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column7" unique_id=1256059569]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay3" type="Timer" parent="Column7" unique_id=1768979740]
+[node name="DropDelay4" type="Timer" parent="Column7" unique_id=1768979740]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime3" type="Timer" parent="Column7" unique_id=1089151789]
+[node name="BottomTime4" type="Timer" parent="Column7" unique_id=1089151789]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="Column7" unique_id=1017667674]
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column7" unique_id=1017667674]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_5xwju")
 
-[node name="SuperJumpSounds3" type="AudioStreamPlayer" parent="Column7" unique_id=1729720808]
+[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column7" unique_id=1729720808]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay4" type="Timer" parent="Column7" unique_id=978123817]
+[node name="DropDelay5" type="Timer" parent="Column7" unique_id=978123817]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime4" type="Timer" parent="Column7" unique_id=996059302]
+[node name="BottomTime5" type="Timer" parent="Column7" unique_id=996059302]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="Column7" unique_id=185619896]
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column7" unique_id=185619896]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_kxp6t")
 
-[node name="SuperJumpSounds4" type="AudioStreamPlayer" parent="Column7" unique_id=2144199767]
+[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column7" unique_id=2144199767]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay5" type="Timer" parent="Column7" unique_id=1975034465]
+[node name="DropDelay6" type="Timer" parent="Column7" unique_id=1975034465]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime5" type="Timer" parent="Column7" unique_id=1283635609]
+[node name="BottomTime6" type="Timer" parent="Column7" unique_id=1283635609]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="Column7" unique_id=180248245]
+[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column7" unique_id=180248245]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_pnuok")
 
-[node name="SuperJumpSounds5" type="AudioStreamPlayer" parent="Column7" unique_id=1183329461]
+[node name="SuperJumpSounds6" type="AudioStreamPlayer" parent="Column7" unique_id=1183329461]
 stream = ExtResource("15_y4g23")
 
-[node name="DropDelay6" type="Timer" parent="Column7" unique_id=233577291]
+[node name="DropDelay7" type="Timer" parent="Column7" unique_id=233577291]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime6" type="Timer" parent="Column7" unique_id=433446373]
+[node name="BottomTime7" type="Timer" parent="Column7" unique_id=433446373]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="Column7" unique_id=1607412926]
+[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column7" unique_id=1607412926]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 
-[node name="DropDelay7" type="Timer" parent="Column7" unique_id=1026274496]
+[node name="DropDelay8" type="Timer" parent="Column7" unique_id=1026274496]
 wait_time = 0.5
 one_shot = true
 
-[node name="BottomTime7" type="Timer" parent="Column7" unique_id=1693455090]
+[node name="BottomTime8" type="Timer" parent="Column7" unique_id=1693455090]
 wait_time = 3.0
 one_shot = true
 
-[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="Column7" unique_id=195595829]
+[node name="AudioStreamPlayer3D8" type="AudioStreamPlayer3D" parent="Column7" unique_id=195595829]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = SubResource("AudioStreamPlaylist_4sbii")
 

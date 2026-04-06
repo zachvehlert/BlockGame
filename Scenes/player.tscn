@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dn6fqml84cne8" path="res://Assets/jump1.wav" id="10_ukyrk"]
 [ext_resource type="AudioStream" uid="uid://b0a44bpr21sf7" path="res://Assets/jump2.wav" id="11_7dp3o"]
 [ext_resource type="AudioStream" uid="uid://qkill5gbe5a" path="res://Assets/jump3.wav" id="12_h4iuc"]
+[ext_resource type="AudioStream" uid="uid://i88qbffnx7ut" path="res://Assets/land-sound.wav" id="13_land"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_go701"]
 
@@ -308,3 +309,8 @@ volume_db = -5.0
 
 [node name="JumpSounds" type="AudioStreamPlayer" parent="." unique_id=1624767234]
 stream = SubResource("AudioStreamRandomizer_fd4e3")
+
+[node name="LandSound" type="AudioStreamPlayer" parent="." unique_id=1572103080]
+stream = ExtResource("13_land")
+volume_db = -10.0
+pitch_scale = 2.0

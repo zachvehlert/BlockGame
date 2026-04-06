@@ -27,6 +27,7 @@ signal jumped
 
 # Player Sounds
 @onready var jump_sounds: AudioStreamPlayer = $JumpSounds
+@onready var land_sound: AudioStreamPlayer = $LandSound
 
 var _superjump_fov_active := false
 var _default_fov: float
@@ -96,6 +97,7 @@ func _physics_process(delta: float) -> void:
 	if is_on_floor() and state_machine.get_current_node() in ["airborne", "jump"]:
 		state_machine.start("land")
 		emit_dust()
+		land_sound.play()
 		if _superjump_fov_active:
 			_superjump_fov_active = false
 			var tween := create_tween()
